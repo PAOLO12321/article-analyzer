@@ -78,9 +78,9 @@ Hidden premises required for this to hold:
 
 | Claim | Status | Note |
 |-------|--------|------|
-| "Amazon dominates cloud computing" | ✅ Supported | AWS holds the largest share of the IaaS market (commonly cited in public market-share reports). |
-| "AWS gross margins exceed Microsoft and Google" | ⚠️ Oversimplified | Publicly disclosed segment operating margins do show AWS as highly profitable, but direct gross-margin comparison across the three is not cleanly disclosed in the same form. The "can only dream of" framing is rhetorical. |
-| "AWS profits subsidize Amazon's retail operation" | ⚠️ Common misconception | This is a popular online narrative. Amazon's financial filings show AWS as a separately reported, highly profitable segment; whether it "subsidizes" retail depends on accounting interpretation. The framing as a definite fact is stronger than the evidence supports. |
+| "Amazon dominates cloud computing" | ✅ Accurate | AWS holds the largest share of the IaaS market (commonly cited in public market-share reports). |
+| "AWS gross margins exceed Microsoft and Google" | ⚠️ Concept shift | Public filings disclose segment operating margins, not comparable gross margins for the three cloud businesses. The article states a gross-margin comparison that the disclosed figures do not directly support. |
+| "AWS profits subsidize Amazon's retail operation" | ❓ Uncertain | Reason: Amazon's filings report AWS as a separate, profitable segment, but whether that amounts to "subsidizing" retail depends on how internal capital allocation is interpreted. The filings neither confirm nor contradict the word "subsidize". |
 
 ### Layer 3 — Hidden Premises
 
@@ -122,7 +122,7 @@ The paragraph treats Amazon's AWS strategy as the playbook for tech monopolies. 
 
 | Sentence | Category |
 |----------|----------|
-| "By 2030, AI will eliminate 40% of all knowledge work jobs—a fact" | Prediction disguised as fact ⚠️ |
+| "By 2030, AI will eliminate 40% of all knowledge work jobs—a fact" | Prediction (worded as a fact) |
 | "Policymakers refuse to acknowledge" | Opinion (motive attribution) |
 | "The pattern is identical to manufacturing in the 1990s" | Analytical claim / analogy |
 | "Economists assured workers that retraining would solve everything" | Factual claim (verifiable: was this actually the dominant economist view?) |
@@ -136,9 +136,10 @@ The paragraph treats Amazon's AWS strategy as the playbook for tech monopolies. 
 
 | Claim | Status | Note |
 |-------|--------|------|
-| "By 2030, AI will eliminate 40% of all knowledge work jobs — a fact" | ❌ Mislabeled | This is a prediction, not a fact. No prediction about future events can be a fact at the present moment. Multiple research firms have published differing estimates; none constitutes a "fact." |
-| "Goldman Sachs estimates 300 million jobs at risk globally" | ✅ Real report exists | Goldman Sachs has published research estimating large-scale AI exposure. The specific figure has been widely cited. |
-| "Their report deliberately understates the timeline to avoid market panic" | 🔍 No source for motive | The GS report exists, but attributing a deliberate suppression motive requires evidence the present tool could not locate. This is motive attribution: presenting a speculation about intent as fact. |
+| "Economists assured workers that retraining programs would solve everything" | ❓ Uncertain | Reason: the claim names no economist, report or period, so it cannot be matched to a specific source. It is neither confirmed nor contradicted. |
+| "Goldman Sachs estimates 300 million jobs at risk globally" | ✅ Accurate | Goldman Sachs has published research estimating large-scale AI exposure, and the figure matches how it is reported. |
+
+Not verified in this layer: the "40% by 2030" sentence and "this transformation is coming in months" are predictions, and "their report deliberately understates the timeline" is a motive attribution (opinion). Layer 1 already classified them, so they carry no verification label.
 
 ### Layer 3 — Hidden Premises
 
@@ -182,13 +183,14 @@ The paragraph cites the 1990s manufacturing analogy and the Goldman Sachs report
 
 **Opinion type:** Qualified opinion (保留意见)
 
-**Scope:** Covers only the factual claims in the three paragraphs (8 claims total). Does not cover opinions, predictions, or unverifiable narratives.
+**Scope:** Covers only the factual claims in the three paragraphs (7 claims total). Does not cover opinions, predictions, or unverifiable narratives.
+
+**Result by label:** ✅ Accurate 2 / ⚠️ Concept shift 1 / ❌ Factually wrong 0 / 🔍 No source found 2 / ❓ Uncertain 2
 
 **Issues identified:**
-- 2 factual claims could not be verified (no source located)
-- 2 factual claims are partially supported but rhetorically inflated beyond what evidence supports
-- 1 factual claim (Goldman Sachs report) is real but the motive attribution attached to it is unsupported
-- 2 statements are predictions mislabeled as facts
+- ⚠️ Concept shift: "AWS gross margins exceed Microsoft and Google" (paragraph 2)
+- 🔍 No source found: the "7 times" and "340%" figures (paragraph 1)
+- ❓ Uncertain: "AWS subsidizes retail" (paragraph 2) and "economists assured workers" (paragraph 3), reasons given in each row
 
 > **Note:** These paragraphs were fabricated for demonstration purposes. In real use, the tool would search for and cite primary sources.
 

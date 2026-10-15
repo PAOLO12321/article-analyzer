@@ -50,7 +50,7 @@ The skill activates automatically when these phrases are detected. It will produ
 | Layer | What it does |
 |-------|-------------|
 | 1. Sentence classification | Sort every sentence into: factual claim / opinion / unverifiable narrative / prediction |
-| 2. Fact verification | Search primary sources for each factual claim. Mark as ✅ supported, ⚠️ partial, ❌ contradicted, or 🔍 no source found |
+| 2. Fact verification | Search primary sources for each factual claim. Mark with one of five fixed labels: ✅ Accurate, ⚠️ Concept shift, ❌ Factually wrong, 🔍 No source found, or ❓ Uncertain (with a stated reason) |
 | 3. Hidden premises | Identify assumptions the argument depends on but doesn't state |
 | 4. Selective presentation | Compare to primary sources — does the article rewrite, cherry-pick, or strip context? |
 | 5. Logical chain | Map the reasoning path; flag jumps where steps are skipped |
