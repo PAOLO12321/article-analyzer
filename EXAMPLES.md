@@ -1,201 +1,27 @@
-# Example: Deconstructing Three Fabricated Paragraphs
+# Example: One Paragraph, Before and After
 
-> **Disclaimer:** The three paragraphs below are fabricated for demonstration purposes. They mimic common patterns in popular online writing. Mentions of real companies, figures, or institutions are used only to make the examples feel realistic — they do not represent actual statements, reports, or analyses by those entities.
+> The paragraph below is fabricated for demonstration. It imitates a common style of online business writing. Company names are used only to make it feel realistic and do not represent real statements by those companies.
 
----
+## The original
 
-## Paragraph 1 — Self-help / Success Writing Style
+> (1) Amazon's dominance in cloud computing reveals the fundamental playbook for tech monopolies: vertical integration plus relentless price cuts. (2) Amazon has achieved gross margins that Microsoft and Google can only dream of. (3) Industry insiders have long whispered that AWS profits subsidize Amazon's entire retail operation. (4) This same pattern will define which AI companies survive the next decade. (5) Smaller AI startups without their own infrastructure are essentially walking dead, as one prominent VC recently told me.
 
-> "Recent research has confirmed what high-performers have always known: the secret to extraordinary success isn't talent or intelligence—it's the willingness to fail spectacularly. Studies show that the most successful entrepreneurs failed an average of 7 times before their first breakthrough. This counterintuitive truth explains why traditional education, which punishes failure, produces conformists rather than innovators. If you're afraid to fail, you've already lost. The data is unambiguous: those who embrace failure outearn their cautious peers by 340% within ten years."
+## What the tool returns
 
-### Layer 1 — Sentence Classification
+| # | Type | Result |
+|---|------|--------|
+| 1 | Fact + opinion | "Amazon leads cloud computing" is a factual claim: ✅ Accurate. "Reveals the fundamental playbook" is the author's interpretation. |
+| 2 | Fact | ⚠️ Concept shift. Public filings disclose segment operating margins, not comparable gross margins. Rhetoric: "can only dream of" inflates the comparison. |
+| 3 | Unverifiable narrative + fact | "Industry insiders whispered" is an anonymous source. The subsidy claim itself: ❓ Uncertain. Reason: filings show AWS as a separate profitable segment, but whether that is "subsidizing" retail depends on interpretation. |
+| 4 | Prediction | Not verified. A claim about the future. |
+| 5 | Opinion + unverifiable narrative | "Walking dead" is emotional framing. "One prominent VC told me" is an anonymous source. |
 
-| Sentence (paraphrased) | Category |
-|------------------------|----------|
-| "Recent research has confirmed..." | Pseudo-authority (no citation) → treated as Opinion |
-| "Studies show ... failed an average of 7 times" | Factual claim (needs verification) |
-| "This counterintuitive truth explains why..." | Opinion (presented as fact via "truth") |
-| "Traditional education ... produces conformists" | Opinion / analytical description |
-| "If you're afraid to fail, you've already lost" | Opinion (rhetorical) |
-| "The data is unambiguous: ... outearn ... by 340%" | Factual claim (specific statistic, needs verification) |
+**Hidden premise.** The argument assumes AI markets will work like cloud infrastructure. The paragraph does not say why.
 
-### Layer 2 — Fact Verification
+**Logical jump.** From "Amazon won cloud this way" (1) to "this decides who survives in AI" (4). The steps in between are not stated.
 
-| Claim | Verification status | Note |
-|-------|-------------------|------|
-| "Successful entrepreneurs failed an average of 7 times before their first breakthrough" | 🔍 No source found | The author does not name the study. The "7 times" figure is widely repeated online but the present tool could not locate a primary research source. Not found ≠ false. |
-| "Those who embrace failure outearn cautious peers by 340% within ten years" | 🔍 No source found | No primary study located. The precise number suggests a specific study exists, but it could not be identified. |
-
-### Layer 3 — Hidden Premises
-
-**Argument:** Embracing failure → success
-
-Hidden premises required for this to hold:
-
-1. Failure and success have a causal relationship (not merely correlated)
-2. The "successful entrepreneurs" sample is not selection-biased (survivorship bias)
-3. The 340% figure controls for industry, education, starting capital, era
-4. "Willingness to fail" can be intentionally cultivated, not just observed in retrospect
-
-**If premises fail:** The advice collapses to "people who happened to fail a lot and also succeeded, succeeded" — a tautology that gives no actionable guidance.
-
-### Layer 5 — Logical Chain
-
-**Chain:** People who succeed had multiple failures → therefore failure causes success → therefore you should seek failure → therefore avoiding failure causes poverty
-
-**Jumps:**
-- From "correlation in survivor sample" to "causation" (1 unverified step)
-- From "causation" to "actionable strategy" (1 unverified step)
-- From "embrace failure" to "340% income difference" (entire mechanism unstated)
-
-### Layer 6 — Rhetorical Devices
-
-- "Recent research has confirmed" — pseudo-authority (no actual research cited)
-- "counterintuitive truth" — preloads opinion as factual revelation
-- "The data is unambiguous" — claim of certainty without source
-- "If you're afraid to fail, you've already lost" — emotional framing, sets reader's identity at stake
+**Audit opinion: Qualified.** Covers the 3 factual claims only: ✅ 1 / ⚠️ 1 / ❓ 1. Opinions and predictions are not covered.
 
 ---
 
-## Paragraph 2 — Business Analysis Style
-
-> "Amazon's dominance in cloud computing reveals the fundamental playbook for tech monopolies in the 21st century: vertical integration combined with relentless price cuts. By owning the entire stack from chips to applications, Amazon has achieved gross margins that Microsoft and Google can only dream of. Industry insiders have long whispered that AWS profits subsidize Amazon's entire retail operation. This same pattern—integrate, then crush—will define which AI companies survive the next decade. Smaller AI startups without their own infrastructure are essentially walking dead, as one prominent VC recently told me."
-
-### Layer 1 — Sentence Classification
-
-| Sentence | Category |
-|----------|----------|
-| "Amazon's dominance in cloud computing" | Factual claim (verifiable: market share) |
-| "...reveals the fundamental playbook for tech monopolies" | Opinion (analytical interpretation) |
-| "Amazon has achieved gross margins that Microsoft and Google can only dream of" | Factual claim (comparative margins are verifiable) |
-| "Industry insiders have long whispered..." | Unverifiable narrative (anonymous claim) |
-| "AWS profits subsidize Amazon's entire retail operation" | Factual claim (verifiable via public filings) |
-| "This same pattern...will define which AI companies survive" | Prediction (future claim, intrinsically unverifiable) |
-| "Smaller AI startups...are essentially walking dead" | Opinion (rhetorical) |
-| "...as one prominent VC recently told me" | Unverifiable narrative (anonymous source) |
-
-### Layer 2 — Fact Verification
-
-| Claim | Status | Note |
-|-------|--------|------|
-| "Amazon dominates cloud computing" | ✅ Accurate | AWS holds the largest share of the IaaS market (commonly cited in public market-share reports). |
-| "AWS gross margins exceed Microsoft and Google" | ⚠️ Concept shift | Public filings disclose segment operating margins, not comparable gross margins for the three cloud businesses. The article states a gross-margin comparison that the disclosed figures do not directly support. |
-| "AWS profits subsidize Amazon's retail operation" | ❓ Uncertain | Reason: Amazon's filings report AWS as a separate, profitable segment, but whether that amounts to "subsidizing" retail depends on how internal capital allocation is interpreted. The filings neither confirm nor contradict the word "subsidize". |
-
-### Layer 3 — Hidden Premises
-
-**Argument:** Amazon's cloud strategy → universal template for AI company survival
-
-Hidden premises:
-1. The AI industry will behave structurally like cloud infrastructure (capital intensity, scale economics)
-2. Vertical integration is necessary, not merely one viable strategy
-3. The author can correctly predict which startups have "their own infrastructure" and which don't, ten years out
-
-### Layer 5 — Logical Chain
-
-**Chain:** Amazon won cloud via integration → integration is "the" playbook → AI follows same playbook → startups without infrastructure die
-
-**Jumps:** 2 large jumps.
-- "Amazon won cloud" → "this is THE playbook for tech" (skips alternative strategies like Salesforce's, Apple's, OpenAI's partnership model)
-- "Amazon's playbook applies to AI" (skips structural differences between cloud and AI markets — training cost, model commoditization, open source dynamics)
-
-### Layer 6 — Rhetorical Devices
-
-- "Industry insiders have long whispered" — appeals to insider knowledge without naming the insiders
-- "can only dream of" — rhetorical exaggeration of comparative data
-- "walking dead" — emotional certainty about an inherently uncertain prediction
-- "as one prominent VC recently told me" — anonymous-but-credentialed source, unverifiable
-
-### Layer 4 — Selective Presentation
-
-The paragraph treats Amazon's AWS strategy as the playbook for tech monopolies. Omitted: OpenAI's success without owning chip infrastructure (relies on Microsoft partnership), the existence of profitable verticalized startups in non-tech domains, and historical cases where vertical integration failed (AT&T, IBM in the PC era).
-
-**Selective presentation type:** 断章取义 / cherry-picking — uses one successful case to imply a universal rule.
-
----
-
-## Paragraph 3 — Tech / Future Trends Style
-
-> "By 2030, AI will eliminate 40% of all knowledge work jobs—a fact that policymakers refuse to acknowledge. The pattern is identical to what happened with manufacturing in the 1990s, when economists assured workers that retraining programs would solve everything. We all know how that turned out. Goldman Sachs estimates that 300 million jobs are at risk globally, but their report deliberately understates the timeline to avoid market panic. Anyone who has worked closely with these models understands: this transformation isn't coming in decades, it's coming in months. The window to prepare is closing."
-
-### Layer 1 — Sentence Classification
-
-| Sentence | Category |
-|----------|----------|
-| "By 2030, AI will eliminate 40% of all knowledge work jobs—a fact" | Prediction (worded as a fact) |
-| "Policymakers refuse to acknowledge" | Opinion (motive attribution) |
-| "The pattern is identical to manufacturing in the 1990s" | Analytical claim / analogy |
-| "Economists assured workers that retraining would solve everything" | Factual claim (verifiable: was this actually the dominant economist view?) |
-| "We all know how that turned out" | Opinion (consensus assertion) |
-| "Goldman Sachs estimates 300 million jobs at risk" | Factual claim (verifiable: GS did publish a report on this topic) |
-| "Their report deliberately understates the timeline to avoid market panic" | Motive attribution — opinion presented as fact |
-| "Anyone who has worked closely with these models understands..." | Pseudo-authority (in-group appeal) |
-| "This transformation isn't coming in decades, it's coming in months" | Prediction disguised as fact |
-
-### Layer 2 — Fact Verification
-
-| Claim | Status | Note |
-|-------|--------|------|
-| "Economists assured workers that retraining programs would solve everything" | ❓ Uncertain | Reason: the claim names no economist, report or period, so it cannot be matched to a specific source. It is neither confirmed nor contradicted. |
-| "Goldman Sachs estimates 300 million jobs at risk globally" | ✅ Accurate | Goldman Sachs has published research estimating large-scale AI exposure, and the figure matches how it is reported. |
-
-Not verified in this layer: the "40% by 2030" sentence and "this transformation is coming in months" are predictions, and "their report deliberately understates the timeline" is a motive attribution (opinion). Layer 1 already classified them, so they carry no verification label.
-
-### Layer 3 — Hidden Premises
-
-**Argument:** AI job displacement is happening on a months-scale, and institutions are hiding it
-
-Hidden premises:
-1. AI capability improvements translate linearly into job elimination
-2. The 1990s manufacturing precedent is structurally analogous (skill substitution dynamics, retraining feasibility, geographic mobility — all comparable)
-3. Policymakers and Goldman Sachs share a coordinated motive to understate the timeline
-4. "Working closely with these models" gives access to a truth that broader analysis misses
-
-### Layer 5 — Logical Chain
-
-**Chain:** AI improving → 40% job loss by 2030 → policymakers know but hide it → GS knows but understates → only insiders see the truth → "months not decades"
-
-**Jumps:** Every step contains an unverified leap.
-- "AI improving" to "40% job loss" requires a specific displacement model (none cited)
-- "Hiding it" requires evidence of suppression (none cited)
-- The final "months not decades" contradicts the "by 2030" framing earlier in the same paragraph — internal inconsistency
-
-### Layer 6 — Rhetorical Devices
-
-- "—a fact that policymakers refuse to acknowledge" — reframes a prediction as suppressed truth
-- "We all know how that turned out" — invokes a shared narrative without specifying it
-- "deliberately understates" — motive attribution presented as established fact
-- "Anyone who has worked closely with these models understands" — in-group authority appeal, makes disagreement = ignorance
-- "The window to prepare is closing" — urgency framing
-
-### Layer 4 — Selective Presentation
-
-The paragraph cites the 1990s manufacturing analogy and the Goldman Sachs report as supporting evidence. Omitted:
-- Economic research showing manufacturing job loss had multiple causes (trade policy, automation, financialization), not a single cause that maps cleanly to AI
-- The GS report itself discusses job augmentation alongside displacement
-- Counter-research from other institutions giving lower or differently-distributed estimates
-
-**Selective presentation type:** 前提缺失 / context-stripping — references real reports while omitting their qualifications and counter-evidence.
-
----
-
-## ═══ Audit Opinion ═══
-
-**Opinion type:** Qualified opinion (保留意见)
-
-**Scope:** Covers only the factual claims in the three paragraphs (7 claims total). Does not cover opinions, predictions, or unverifiable narratives.
-
-**Result by label:** ✅ Accurate 2 / ⚠️ Concept shift 1 / ❌ Factually wrong 0 / 🔍 No source found 2 / ❓ Uncertain 2
-
-**Issues identified:**
-- ⚠️ Concept shift: "AWS gross margins exceed Microsoft and Google" (paragraph 2)
-- 🔍 No source found: the "7 times" and "340%" figures (paragraph 1)
-- ❓ Uncertain: "AWS subsidizes retail" (paragraph 2) and "economists assured workers" (paragraph 3), reasons given in each row
-
-> **Note:** These paragraphs were fabricated for demonstration purposes. In real use, the tool would search for and cite primary sources.
-
----
-
-## Tool Disclosure
-
-This analysis is AI-assisted. Verification is based on publicly searchable sources; "no source found" does not mean "the claim is false." The framework reflects the tool's structural understanding and may contain errors. For decisions of consequence, please verify independently.
+In real use, every verification result also lists the source it was checked against. Results here are illustrative.

@@ -70,7 +70,7 @@ The skill never issues a "negative" opinion. Even if every factual claim turns o
 
 ## Example
 
-See [EXAMPLES.md](EXAMPLES.md) for a full walkthrough: three fabricated paragraphs (self-help, business analysis, tech-future) deconstructed through all six layers.
+See [EXAMPLES.md](EXAMPLES.md) for a short before-and-after: one fabricated paragraph and what the tool returns for it.
 
 ## Design principles
 
