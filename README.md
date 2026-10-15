@@ -28,7 +28,7 @@ This is a Claude skill, designed to be loaded by Claude Code or any Claude envir
 
 ```bash
 # Clone into your Claude skills directory
-git clone https://github.com/<your-username>/article-analyzer.git ~/.claude/skills/article-analyzer
+git clone https://github.com/PAOLO12321/article-analyzer.git ~/.claude/skills/article-analyzer
 ```
 
 Or copy `SKILL.md` into wherever your Claude environment loads skills from.
