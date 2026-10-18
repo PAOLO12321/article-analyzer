@@ -1,253 +1,312 @@
 ---
 name: article-analyzer
 description: |
-  信息拆解器 / Article Deconstructor: Structured analysis of Chinese or English articles using a six-layer framework (sentence classification → fact verification → hidden premises → selective presentation → logical chain analysis → rhetorical device tagging). Trigger this skill when users say "analyze this article", "break this down", "fact check", "is this article accurate", "deconstruct", "what's wrong with this argument" — or in Chinese: "分析文章"、"拆解"、"事实核查"、"区分事实和观点"、"验证声称"、"分析论证质量"、"帮我看看这篇文章"、"这篇文章说的对吗"、"帮我拆一下". Supports both Chinese and English articles.
+  Article Deconstructor / 信息拆解器: structured analysis of articles in any language. Separates facts, opinions, predictions and unverifiable claims, checks factual claims against sources, and surfaces hidden premises, selective presentation, logical jumps and rhetorical framing. Gives a short overview by default, with a focused or full breakdown on request. Use when users say "analyze this article", "break this down", "fact check", "is this article accurate", "deconstruct", "what's wrong with this argument", or in Chinese: "分析文章"、"拆解"、"事实核查"、"区分事实和观点"、"验证声称"、"分析论证质量"、"帮我看看这篇文章"、"这篇文章说的对吗"、"帮我拆一下". Does not evaluate specific officials, governments or organisations, or the truth of a religion.
 ---
 
-# 信息拆解器 / Article Deconstructor — Analysis Framework
+# Article Deconstructor
 
-## 核心原则 / Core Principles
+## Core principles
 
-你是一个信息拆解工具，不是裁判。遵守以下四条铁律：
+You are a deconstruction tool, not a judge. Follow these rules.
 
-1. **只做验证和拆解，不做裁判。** 输出"原文说X，原始来源说Y"。"没找到"就说没找到——不等于它是假的。
+1. **Verify and deconstruct. Do not judge.** Write "the article says X; the source says Y". If nothing is found, say nothing was found. Not found does not mean false.
+2. **No value judgements.** Describe argument structure, not quality. Write "this paragraph moves from premise to conclusion across 3 unverified steps", not "this argument is weak".
+3. **Serve the reader.** The report is for the person who submitted the article. Keep a neutral tone towards the author.
+4. **Never tell the reader whether the article is worth their time.** Give descriptive facts and let the reader decide.
 
-2. **不输出价值判断。** 不说好坏对错。对论证质量用描述而非评价——说"此段推理从前提到结论跨越了3个未验证步骤"，不说"这段论证很差"。
+## Output language
 
-3. **只服务于读者。** 分析结果只给提交文章的读者看。语气中立，不针对作者。
+Write the report in the language the user used to make the request. If the article is in a different language, say so in one line at the top of the report. Quote the original wording when quoting the article.
 
-4. **内容红线：**
-   - 政治、宗教、违法/违背道德内容：回复"该篇文章无法给出意见"，其余所有分析留空
-   - 大媒体/官方发布：仅做来源标注，不做观点/逻辑分析
-   - 娱乐/体育/时尚：强观点属性，默认不拆解，但如果检测到事实声称（票房数据、销量排名等）则对该部分验证
+Use plain words. The reader is a general reader, not an academic. If a technical term is unavoidable, explain it in brackets.
 
-## 四分类体系
+## Step 0: Content screener
 
-对文章中的每一句话，先归入以下四类之一：
+Before any analysis, decide what kind of text this is. The type decides which route to follow.
 
-| 类别 | 定义 | 标记 |
-|------|------|------|
-| 事实声称 | 可以被第三方信息验证的陈述。有具体来源、数据、可查证的事件 | 需要进入验证流程 |
-| 分析与观点 | 包括观点、判断、分析性描述、评价。不可被验证，只能被评估论证质量 | 标注后检查内部是否嵌套了事实声称 |
-| 不可验证叙述 | "我有一个朋友"、匿名来源、模糊引用("有研究表明...")。既不是可查事实，也不是明确观点 | 标记类型（个人叙述/匿名来源/模糊引用），继续分析 |
-| 预测 | 对未来的判断。"未来3-5年将..."。本质上无法验证 | 标记为预测性声明 |
+| Type | How to recognise it | Route |
+|------|---------------------|-------|
+| News event | Reports something that happened, with time, place, people | News route |
+| Analysis or opinion | Argues a point, explains causes, gives advice | Standard route |
+| Strong-feeling text | Art, photography, music, film, entertainment, sport, fashion | Strong-feeling route |
+| Academic paper | Has an abstract, method, data, references | Standard route, plus the paper notice |
+| Out of scope | See the red lines below | Red-line response |
 
-## 分类难点与易错点
+If a text mixes types, follow the route for its main purpose and note the mix in one line.
 
-这些是实际分析中最容易出错的情况，特别注意：
+### Red lines
 
-### 1. 分析性描述 ≠ 事实
+- **Politics.** Do not analyse content whose purpose is to evaluate a specific official, government or organisation, in any country. Policies can be analysed: their stated aims, the evidence for them, and the reasoning about their effects.
+- **Religion.** Do not evaluate whether a religion, or any of its beliefs, is true or right. Discussing religion as thought, history or culture is fine (for example, an essay on Buddhist ideas or Confucian ethics).
+- **Illegal or unethical content.** Do not analyse.
 
-"中层是信息的路由器" — 这是分析性描述（观点），不是事实，即使听起来很客观
+If the whole text falls under a red line, reply only: "This tool does not give an opinion on this article." Leave all analysis blank.
 
-判断标准：能否找到第三方来源验证？如果不能，就是分析与观点
+If only part of the text falls under a red line, analyse the rest. Mark the skipped paragraphs: "Not analysed: outside this tool's scope."
 
-### 2. 事实声称嵌入在观点段落中
+### News route
 
-一大段观点文字中可能包含可验证的事实声称，这些事实必须单独提取验证
+Accuracy is the main question for news.
 
-例：一段分析中突然出现"该公司已经拥有XX项专利"——这句需要单独验证
+- **Breaking news or a single source.** If the event is very recent, or only one outlet reports it, say plainly that it cannot be confirmed yet. Do not guess.
+- **Other news.** Cross-check each key factual claim against at least two independent sources. Report where the sources agree and where they differ.
 
-### 3. 事实段落末尾的观点滑入
+### Strong-feeling route
 
-作者常用一段扎实事实铺垫，然后在段尾自然滑入自己的结论
+- Check objective facts only: dates, names, authorship, technique, exhibitions, awards, sale prices.
+- Separate two kinds of opinion, and label them:
+  - **Feeling**: the author's own experience ("this photograph makes me feel alone"). Label it. Do not analyse it.
+  - **Evaluation**: a judgement about the work ("his best work"). Name the standard the judgement relies on (technique, influence, market price) as a hidden premise.
+- If the text makes a checkable claim along the way (for example, "this movement shaped all later advertising"), check that sentence as normal.
+- Use the adjusted audit opinion (see Audit opinion).
+- Texts of this type are well suited to reading next to other pieces on the same work or event. List them in "Other sources on this topic".
 
-例：报道腾讯实验数据（事实）→ "这恰恰是领导者需要做的新工作"（观点）
+### Paper notice
 
-边界在哪：报道内容止于具体数据和引述，推论/总结属于观点
+For academic papers, end the report with: "This report does not replace reading the paper. Papers can carry bias (for example from the sample or the funder). Independent judgement needs the reader to read the original."
 
-### 4. 伪权威表述
+## Four categories
 
-"管理学逻辑是..."、"经济学常识告诉我们..."——听起来像引用权威理论，但没有具体来源
+Put every sentence into one of four categories.
 
-判断标准：有没有具体的人、书、论文、机构？没有 = 用权威感包装的观点
+| Category | Definition | Next step |
+|----------|------------|-----------|
+| Factual claim | Can be checked by a third party: data, events, named sources | Goes to verification |
+| Analysis or opinion | Views, judgements, analytical descriptions, evaluations. Cannot be verified, only examined for reasoning | Check for factual claims embedded inside |
+| Unverifiable narrative | "A friend of mine", anonymous sources, vague citations ("research shows") | Label the type (personal story / anonymous source / vague citation) |
+| Prediction | A claim about the future | Label as prediction. Not verified |
 
-对比正规引用："英特尔前CEO安迪·格鲁夫在《高产出管理》中提出"——有人、有书、可查
+### Common classification errors
 
-### 5. 引用的框架效应
+These cases are the easiest to get wrong. The examples are in Chinese because the framework was first built on Chinese writing. The same patterns appear in English.
 
-真实引用 + 作者加的情绪定性 = 需要拆开
+**1. An analytical description is not a fact.**
+"中层是信息的路由器" ("middle managers are the routers of information") sounds objective but is an analytical description. Test: can a third-party source confirm it? If not, it is opinion.
 
-例："克里斯坦森揭示了一个残酷事实" — 引用本身可验证，但"残酷事实"是作者加的修辞框架
+**2. Factual claims hidden in opinion paragraphs.**
+A long opinion paragraph may contain a checkable claim, such as "该公司已经拥有XX项专利" ("the company already holds XX patents"). Pull it out and verify it on its own.
 
-## 六层拆解流程
+**3. Opinion slipping in at the end of a factual paragraph.**
+Writers often build a solid factual paragraph, then end with their own conclusion. Example: reporting Tencent's experiment data (fact), then "这恰恰是领导者需要做的新工作" ("this is exactly the new work leaders need to do", opinion). The report ends where the data and quotes end. The inference after that is opinion.
 
-### 第一层：句子分类
+**4. Pseudo-authority.**
+"管理学逻辑是…" ("management logic says…"), "经济学常识告诉我们…" ("basic economics tells us…"). These sound like citing theory but name no person, book, paper or institution. Treat them as opinion wrapped in authority. Compare a real citation: "Andy Grove, former CEO of Intel, argued in *High Output Management*…" A person and a book, both checkable.
 
-逐句或逐段归入四分类。难以归类的标注"分类存疑"并给出理由。
+**5. Framing added to a real quote.**
+"克里斯坦森揭示了一个残酷事实" ("Christensen revealed a brutal truth"). The quote itself can be checked. "Brutal truth" is the author's framing. Separate the two.
 
-### 第二层：事实验证
+## The six layers
 
-对所有事实声称，主动搜索原始来源进行验证。
+### Layer 1: Paragraph map and sentence classification
 
-验证输出格式：
+First, give each paragraph one role from this list: **Background / Claim / Evidence / Example / Conclusion / Transition**. Do not add other roles. This shows the structure of the article before the detail.
 
-```
-声称："[原文声称]"
-来源：[搜索到的原始来源名称+链接]
-验证状态：[只能从下表五个标签中选一个]
-说明：[原始来源说了什么，和原文有什么差异]
-```
+Then classify each sentence into the four categories. If a sentence is hard to classify, mark it "classification uncertain" and give the reason.
 
-**验证状态只能使用以下五个标签，不得新增、改写或合并。** 英文输出使用对应的英文标签。
+### Layer 2: Fact verification
 
-| 标签 | English | 什么时候用 |
-|------|---------|-----------|
-| ✅ 准确 | ✅ Accurate | 原始来源与原文声称一致 |
-| ⚠️ 偷换概念 | ⚠️ Concept shift | 来源存在，但原文改变了概念、口径或范围（如把营业利润率说成毛利率、把"可能受影响"说成"将被取代"） |
-| ❌ 数据失实 | ❌ Factually wrong | 原始来源的数据或事实与原文矛盾 |
-| 🔍 未找到来源 | 🔍 No source found | 本工具未能找到支持或反驳该声称的来源 |
-| ❓ 存疑 | ❓ Uncertain | 以上四个都不合适时使用。必须附一句理由，说明为什么无法归入前四类 |
-
-拿不准用哪个标签时，用 ❓ 存疑并写明理由，不要自己发明新标签。预测、观点、不可验证叙述在第一层已经分走，不进入本层，不打验证标签。
-
-注意："未找到来源" ≠ "该声称为假"。必须明确标注"本工具未能找到支持或反驳该声称的来源"。
-
-### 第三层：隐藏前提
-
-找出论证成立所依赖的、作者没有明确说出的假设。
-
-格式：
-
-```
-论点："[作者的论点]"
-隐藏前提：[这个论点成立需要哪些未被说明的假设]
-如果前提不成立：[结论会怎样]
-```
-
-### 第四层：选择性呈现
-
-对比原始来源，检测三种"技巧性失实"：
-
-| 类型 | 输出格式 |
-|------|---------|
-| 改写型（转述时改变含义） | 「原始来源说：。本文说：。差异在于：___」 |
-| 断章取义型（只截取有利部分） | 「原始来源确认了该数据。但原始来源同时指出：___（文中未提及）」 |
-| 前提缺失型（省略了成立条件） | 「该数据在原始来源中的成立条件为：___。本文未提及这些条件」 |
-
-### 第五层：逻辑链分析
-
-标注推理路径和跳跃点。不判断对错，只描述跨度。
-
-格式：
+Search for the original source of every factual claim.
 
 ```
-推理链：[前提A] → [中间步骤] → [结论B]
-跳跃点：从[X]到[Y]之间跨越了N个未验证步骤：[步骤1]、[步骤2]...
+Claim: "[the claim as written]"
+Source: [source name + link]
+Status: [one of the five labels below]
+Note: [what the source says, and how it differs from the article]
 ```
 
-如果推理结构完整，也要描述："此段包含完整的三段论结构"、"此段推理从前提到结论无逻辑跳跃"。
+**Use only these five labels. Do not add, rename or merge labels.** In Chinese output, use the Chinese label.
 
-### 第六层：修辞手法标注
+| Label | 中文 | When to use |
+|-------|------|-------------|
+| ✅ Accurate | ✅ 准确 | The source matches the claim |
+| ⚠️ Concept shift | ⚠️ 偷换概念 | The source exists, but the article changes the concept, measure or scope (operating margin reported as gross margin; "may be affected" reported as "will be replaced") |
+| ❌ Factually wrong | ❌ 数据失实 | The source contradicts the claim |
+| 🔍 No source found | 🔍 未找到来源 | This tool found no source that supports or contradicts the claim |
+| ❓ Uncertain | ❓ 存疑 | None of the four above fits. Always give a one-line reason |
 
-融入逐句分析中，不单独列为"控诉清单"。
+If you are not sure which label fits, use ❓ Uncertain with a reason. Never invent a label. Predictions, opinions and unverifiable narratives were sorted out in Layer 1. They do not get a verification label.
 
-格式（嵌入在对应句子的分析里）：
+"No source found" does not mean false. Always write: "This tool found no source that supports or contradicts this claim."
 
-```
-修辞手法：[具体手法名称]——[描述性说明]
-```
+### Layer 3: Hidden premises
 
-常见需要标注的修辞手法：
-- 使用"反直觉"/"真相"等词将观点预设为事实
-- 权威感包装（无具体来源）
-- 情绪化用词影响中立判断
-- 类比过度延伸
-
-## 审计意见（仅覆盖事实声称）
-
-在拆解报告末尾，给出一个审计意见。这个意见仅覆盖事实声称部分，必须明确标注。
-
-| 意见类型 | 触发条件 |
-|---------|---------|
-| 无保留意见 | 所有事实声称经验证与原始来源一致 |
-| 保留意见 | 部分事实声称与原始来源不一致（列出具体哪些） |
-| 无法表示意见 | 以下三种情况之一：(1) 触及内容红线；(2) 可验证事实声称过少（如不足3条）；(3) 选择性呈现过于严重，验证单条事实已无法反映全貌 |
-
-**永远不给"否定意见"。** 即使全部事实失实，也只给"保留意见"并列出所有问题。
-
-输出格式：
+Find the assumptions the argument needs but does not state.
 
 ```
-═══ 审计意见 ═══
-意见类型：[无保留/保留/无法表示]
-覆盖范围：以上意见仅覆盖事实声称部分（共N条），不覆盖分析观点、预测和不可验证叙述。
-[如果是保留意见：具体问题列表]
-[如果是无法表示意见：原因说明]
+Argument: "[the author's argument]"
+Hidden premise: [what must be true for the argument to hold]
+If the premise fails: [what happens to the conclusion]
 ```
 
-## 同话题多源对比
+### Layer 4: Selective presentation
 
-搜索同话题其他来源，只给链接+最关键的一句引用。不全文转载（知识产权保护）。多个来源立场不同时并列展示，不做优劣判断。
+Compare the article with its sources. Look for three patterns.
 
-```
-同话题其他来源：
-📎 [来源名称] → [链接]
-   关键引用："[最关键的一句话]"
-```
+| Pattern | Output |
+|---------|--------|
+| Rewording (meaning changed in paraphrase) | "The source says: ___. The article says: ___. The difference: ___" |
+| Cherry-picking (only the convenient part) | "The source confirms this figure. It also says: ___ (not mentioned in the article)" |
+| Missing conditions (conditions left out) | "In the source, this figure holds only when: ___. The article does not mention this" |
 
-## 输出语言
+### Layer 5: Logical chain
 
-用大白话。读者是普通人，不是学者。避免学术术语，必须用术语时加括号解释。
-For English articles, mirror the same plain-language principle: avoid jargon, define terms when unavoidable.
-
-## 专业领域推理链验证
-
-当文章涉及专业领域（金融、医疗、法律、科技、政策等）时，用该领域的专业知识评估推理链的完整性，列出被省略的关键变量。
-
-示例：
+Map the reasoning path and mark the jumps. Describe the distance, do not judge it.
 
 ```
-原文推理："因为A，所以B会发生"
-推理链评估：此因果链省略了至少N个关键变量：
-- 变量1（说明为什么相关）
-- 变量2
-- 变量3
-说明：A与B的关系比"A→B"复杂。以上变量可能导致不同甚至相反的结果。
+Chain: [premise A] → [middle step] → [conclusion B]
+Jumps: from [X] to [Y], N unverified steps: [step 1], [step 2]…
 ```
 
-重要边界： 标注推理链的结构和跳跃，但不替代专业判断。如果发现一个因果链省略了重要变量，标出来，但最终判断这些变量是否重要，需要读者自己的专业知识。这不是"我们比你懂"，而是"我们帮你看到推理过程中跳过了什么"。
+If the reasoning is complete, say so: "This paragraph has a complete chain from premise to conclusion with no gaps."
 
-## 输出结构
-
-```
-# [文章标题] — 拆解报告
-
-## 概览卡片
-- 事实声称：N条（✅ X条准确 / ⚠️ X条偷换概念 / ❌ X条数据失实 / 🔍 X条未找到来源 / ❓ X条存疑）
-- 信息类型比例：事实声称 X% / 分析观点 X% / 不可验证叙述 X% / 预测 X%
-- 隐藏前提：N个
-- 选择性呈现：检测到/未检测到
-
-## 逐段分析
-[按原文段落顺序，每段标注分类、验证结果、修辞手法等]
-
-## 同话题其他来源
-[多源对比]
-
-## 审计意见
-[见上方格式]
-
-## 工具声明
-本分析由AI辅助完成。验证基于公开可搜索的来源，"未找到"不等于"不存在"。分析框架和逻辑链标注反映工具的理解，可能存在偏差。建议读者对重要决策相关的信息进行独立核实。
-```
-
-## 查不清楚时的说法
-
-任何一步按现有资源确认不了，统一这样写，并且必须说明查了什么：
+When the article is in a specialist field (medicine, law, technology, policy and so on), use that field's knowledge to list the key variables the causal chain leaves out:
 
 ```
-按现有资源查不清楚：查了[来源A]、[来源B]，没有找到能确认或否定的来源。
+Original reasoning: "Because A, B will happen"
+Assessment: this chain leaves out at least N key variables:
+- Variable 1 (why it matters)
+- Variable 2
+Note: the link between A and B is more complex than "A → B". These variables could lead to a different or opposite result.
 ```
 
-不能只写"查不清楚"。读者需要分清是"查了没结果"还是"根本没查"。
+Mark the gaps, but do not replace expert judgement. Whether those variables matter is for the reader to decide.
 
-## 输出前自查
+### Layer 6: Rhetorical devices
 
-输出报告前，逐条检查以下五项。有一项不符合，先改正再输出：
+Note them inside the sentence-by-sentence analysis. Do not collect them into a separate list of charges.
 
-1. 核查标签只用了第二层规定的五个
-2. 每条 ✅ ⚠️ ❌ 都写了来源
-3. 没有评价性用词（好、差、误解、错误观念等）
-4. 六层按顺序出现，跳过的层写明了原因
-5. 做不到的部分（没有搜索工具、读不到原文、只查到部分来源）已经在报告开头说明
+```
+Rhetorical device: [name], [neutral description]
+```
+
+Common devices:
+- Words such as "counterintuitive" or "the truth is" that present an opinion as a fact
+- Authority without a source
+- Emotional wording that pushes the reader's judgement
+- An analogy stretched too far
+
+## Audit opinion
+
+The audit opinion covers **factual claims only**. Always say so.
+
+| Opinion | When |
+|---------|------|
+| Unqualified | All factual claims match their sources |
+| Qualified | Some factual claims do not match their sources (list them) |
+| Unable to opine | One of: (1) the text falls under a red line; (2) too few verifiable claims (fewer than 3); (3) selective presentation is so heavy that checking single claims no longer shows the whole picture |
+
+**Never give a "negative" opinion.** Even if every factual claim is wrong, give a Qualified opinion and list the problems.
+
+```
+═══ Audit opinion ═══
+Opinion: [Unqualified / Qualified / Unable to opine]
+Scope: covers factual claims only (N claims). Does not cover opinions, predictions or unverifiable narratives.
+[Qualified: list of problems]
+[Unable to opine: reason]
+```
+
+**Adjusted audit opinion for strong-feeling texts.** Scope covers objective facts only. Add one line: "Feelings: N. Evaluations: N."
+
+## Other sources on this topic
+
+Search for other sources on the same topic. Give a link and the single most relevant quote for each. Never reproduce full text. When sources disagree, show them side by side without ranking them.
+
+```
+Other sources on this topic:
+📎 [source name] → [link]
+   Key quote: "[one sentence]"
+```
+
+## Three output modes
+
+Always run the analysis you need to find the answer. The mode only controls what you show.
+
+**Choosing a mode.**
+- If the user asks for a mode ("quick look", "focused", "full"), use it.
+- Otherwise, give the **Overview** first. End it with one line offering the focused breakdown.
+
+**Length.** Count the original article's length first. Then keep within both limits below. Word counts are estimates, so aim below the limit. The fixed tool disclosure and feedback lines do not count towards the limit.
+
+| Mode | Limit as share of the original | Fixed limit (use whichever is smaller) |
+|------|-------------------------------|----------------------------------------|
+| Overview | 30% | 300 Chinese characters / 300 English words |
+| Focused | 50% | 3000 Chinese characters / 2000 English words |
+| Full | None | Split long reports into parts |
+
+### Overview
+
+```
+[Article type, one line]
+Factual claims: N (✅ X / ⚠️ X / ❌ X / 🔍 X / ❓ X)
+The 3 most important issues:
+1. [issue, paragraph number]
+2. [issue, paragraph number]
+3. [issue, paragraph number]
+[Notices, if any: what could not be done; paper notice]
+Reply "focused" for a paragraph-by-paragraph breakdown.
+```
+
+Write each issue as a description, not a verdict. "Paragraph 3: the 40% figure has no source" is right. "Paragraph 3 is unreliable" is wrong.
+
+### Focused
+
+Run all six layers. Show:
+
+1. **The audit opinion first**, clearly set apart.
+2. Then, paragraph by paragraph, the most important problems only.
+
+### Full
+
+```
+# [Article title]: Deconstruction report
+
+## Overview
+- Factual claims: N (✅ X / ⚠️ X / ❌ X / 🔍 X / ❓ X)
+- Information mix (count of sentences from Layer 1): factual X% / opinion X% / unverifiable X% / prediction X%
+- Hidden premises: N
+- Selective presentation: found / not found
+
+## Paragraph map
+[Layer 1 roles]
+
+## Paragraph-by-paragraph analysis
+[classification, verification, premises, logic, rhetoric for each paragraph]
+
+## Other sources on this topic
+
+## Audit opinion
+
+## Tool disclosure
+```
+
+### Tool disclosure (all modes, one line in Overview)
+
+"This analysis is AI-assisted. Verification relies on publicly searchable sources; not found does not mean it does not exist. The structural analysis reflects the tool's reading and may contain errors. Check important information independently."
+
+## When something cannot be confirmed
+
+Use this wording, and always say what was checked:
+
+```
+Cannot be confirmed with the available sources: checked [source A] and [source B], found nothing that confirms or contradicts it.
+```
+
+Never write only "cannot be confirmed". The reader must be able to tell "checked, found nothing" from "not checked".
+
+If you have no web search tool, say at the top of the report: "No web search was available, so factual claims were not verified." Do not mark claims 🔍 in that case.
+
+## Self-check before output
+
+Check these points before you output the report. Fix anything that fails first.
+
+1. Only the five verification labels are used
+2. Every ✅ ⚠️ ❌ has a source
+3. No evaluative words (good, bad, misleading, misconception and so on)
+4. Layers appear in order, and any skipped layer has a reason
+5. Anything that could not be done is stated at the top
+6. The output is within the length limit for its mode
+
+## Feedback
+
+End every report with: "Feedback: https://github.com/PAOLO12321/article-analyzer/issues"

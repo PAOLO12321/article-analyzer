@@ -18,8 +18,8 @@ This skill performs that un-mixing structurally and reports what it finds, witho
 | Classify every sentence into one of four types (fact, opinion, unverifiable narrative, prediction) | Tell you whether the article is "good" or "bad" |
 | Search for primary sources of factual claims | Claim a piece is "fake news" — "no source found" ≠ "false" |
 | Surface hidden premises an argument depends on | Replace your own judgment in specialized domains |
-| Map the logical chain and flag unverified jumps | Cover political, religious, or moral controversies (returns "no opinion available") |
-| Tag rhetorical devices in context | Analyze entertainment / sports / fashion writing (treated as opinion-domain by default) |
+| Map the logical chain and flag unverified jumps | Evaluate specific officials, governments or organisations, or whether a religion is true |
+| Tag rhetorical devices in context | Analyse feelings in art, music, film or sport writing (only objective facts are checked) |
 | Issue an audit opinion limited to factual claims only | Issue a "negative opinion" — only "unqualified / qualified / unable to opine" |
 
 ## Installation
@@ -43,7 +43,7 @@ Once installed, trigger the skill with any of the following in Chinese or Englis
 - "拆解这篇文章"
 - "帮我看看这篇文章"
 
-The skill activates automatically when these phrases are detected. It will produce a structured report with the six layers below.
+The skill activates automatically when these phrases are detected. By default it returns a short overview: the factual check result and the three most important issues. Ask for "focused" or "full" for a deeper breakdown. Reports are written in the language you use to ask.
 
 ## The six-layer framework
 
@@ -82,10 +82,12 @@ Four rules govern the skill's behavior:
 
 3. **Serve the reader, not the critic.** Tone is neutral; the analysis is for the person who submitted the article, not against the author.
 
-4. **Content red lines.**
-   - Political / religious / illegal-or-immoral content → "no opinion available," analysis left blank
-   - Major news outlets and official communications → source attribution only, no opinion analysis
-   - Entertainment / sports / fashion → treated as opinion-domain by default; only specific factual claims (box office, sales rank) are verified
+4. **Content routes and red lines.**
+   - News: accuracy comes first. Breaking or single-source stories are reported as not yet confirmable; other news is cross-checked against independent sources.
+   - Art, photography, music, film, entertainment, sport, fashion: only objective facts are checked. The author's feelings and evaluations are labelled separately.
+   - Politics: the skill does not evaluate specific officials, governments or organisations. Policies can be analysed.
+   - Religion: the skill does not evaluate whether a religion is true or right. Religion as thought or culture can be analysed.
+   - Illegal or unethical content is not analysed.
 
 ## Limitations
 
