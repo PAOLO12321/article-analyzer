@@ -194,7 +194,7 @@ The audit opinion covers **factual claims only**. Always say so.
 |---------|------|
 | Unqualified | All factual claims match their sources |
 | Qualified | Some factual claims do not match their sources (list them) |
-| Unable to opine | One of: (1) the text falls under a red line; (2) too few verifiable claims (fewer than 3); (3) selective presentation is so heavy that checking single claims no longer shows the whole picture |
+| Unable to opine | One of: (1) the text falls under a red line; (2) too few verifiable claims (fewer than 3); (3) selective presentation is so heavy that checking single claims no longer shows the whole picture; (4) no web search was available, so nothing could be verified |
 
 **Never give a "negative" opinion.** Even if every factual claim is wrong, give a Qualified opinion and list the problems.
 
@@ -294,7 +294,52 @@ Cannot be confirmed with the available sources: checked [source A] and [source B
 
 Never write only "cannot be confirmed". The reader must be able to tell "checked, found nothing" from "not checked".
 
-If you have no web search tool, say at the top of the report: "No web search was available, so factual claims were not verified." Do not mark claims 🔍 in that case.
+## When something goes wrong
+
+Never lower the quality of the analysis without saying so. State at the top of the report what could not be done.
+
+| Situation | What to do |
+|-----------|------------|
+| No web search tool | Say at the top: "No web search was available, so factual claims were not verified." Run Layers 1, 3, 5 and 6 as normal. Skip Layers 2 and 4 and give the reason. Do not mark claims 🔍. Do not check facts from your own memory: it may be out of date or wrong. You may still point out where the article contradicts itself (for example, 40% in one paragraph and 30% in another). Audit opinion: Unable to opine, verification not possible. |
+| Paywall, or the link cannot be opened | Say what you received (title only, first part only). Analyse only that. Ask the user to paste the full text. Never guess the content from the title. |
+| Very long text | The Overview still applies, within its length limit. If a Focused or Full report does not fit in one reply, split it and label each part "Part 1 of N". For a text as long as a book chapter, first ask which sections to analyse. |
+| Images or screenshots | If you can read the text in the image, analyse it and say: "The following text was read from an image." For charts, check only what is legible. |
+| Video or audio | Say it cannot be analysed directly. Ask for a transcript. |
+| Part of the text falls under a red line | Analyse the rest. Mark the skipped paragraphs: "Not analysed: outside this tool's scope." |
+| Breaking news or a single source | Say plainly that it cannot be confirmed yet. |
+| The user asks "so is it true or false?" | For a single claim with a clear result, give the result. For the article as a whole, do not give a true or false verdict. List what was confirmed, what could not be confirmed, and where the reader could check further, using the "cannot be confirmed" wording above. |
+| Not an article (an advert, a chat log, code) | If the text makes no claims, say this framework does not apply. A poem goes to the strong-feeling route. |
+
+## Structured output (for agents and pipelines)
+
+If the user asks for JSON or structured output, or another agent calls this skill, output JSON instead of a written report. Otherwise always write the report for a human reader.
+
+Structured output always contains the full analysis. The length limits do not apply. Use only the values listed for each field.
+
+```json
+{
+  "article_type": "news | analysis | strong_feeling | paper | out_of_scope",
+  "article_language": "",
+  "output_language": "",
+  "notices": [""],
+  "paragraphs": [
+    {"index": 1, "role": "background | claim | evidence | example | conclusion | transition", "status": "analysed | outside_scope"}
+  ],
+  "sentences": [
+    {"paragraph": 1, "text": "", "category": "factual_claim | analysis_opinion | unverifiable_narrative | prediction", "subtype": "feeling | evaluation | personal_story | anonymous_source | vague_citation | null"}
+  ],
+  "claims": [
+    {"paragraph": 1, "text": "", "label": "accurate | concept_shift | factually_wrong | no_source_found | uncertain", "source": "", "note": "", "reason_if_uncertain": ""}
+  ],
+  "hidden_premises": [{"argument": "", "premise": "", "if_fails": ""}],
+  "selective_presentation": [{"paragraph": 1, "type": "rewording | cherry_picking | missing_conditions", "detail": ""}],
+  "logic_jumps": [{"from": "", "to": "", "unverified_steps": [""]}],
+  "rhetoric": [{"paragraph": 1, "device": "", "description": ""}],
+  "top_issues": ["", "", ""],
+  "other_sources": [{"name": "", "link": "", "quote": ""}],
+  "audit_opinion": {"opinion": "unqualified | qualified | unable_to_opine", "scope": "", "claims_covered": 0, "issues": [""], "reason": ""}
+}
+```
 
 ## Self-check before output
 
