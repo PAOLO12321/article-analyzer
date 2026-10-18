@@ -239,13 +239,23 @@ Always run the analysis you need to find the answer. The mode only controls what
 ```
 [Article type, one line]
 Factual claims: N (✅ X / ⚠️ X / ❌ X / 🔍 X / ❓ X)
-The 3 most important issues:
+Other issues: hidden premises X · selective presentation X · logic jumps X · rhetorical devices X
+The most important issues:
 1. [issue, paragraph number]
 2. [issue, paragraph number]
 3. [issue, paragraph number]
+These are only the most important. All issues are in the focused report.
 [Notices, if any: what could not be done; paper notice]
-Reply "focused" for a paragraph-by-paragraph breakdown.
+Reply "focused" to see them all.
 ```
+
+The counts must come from the analysis you ran. Do not estimate them.
+
+**How many issues to list.** List up to 3. If there are fewer, list only those. Never pad the list. If there are none, write "No issues found."
+
+**How to choose the most important.** Rank in this order:
+1. Position first: issues in paragraphs marked Claim or Conclusion in the paragraph map come before issues elsewhere.
+2. Then severity, within the same position: ❌ Factually wrong > ⚠️ Concept shift > a hidden premise the main conclusion depends on > 🔍 No source found or ❓ Uncertain > logic jump > rhetorical device.
 
 Write each issue as a description, not a verdict. "Paragraph 3: the 40% figure has no source" is right. "Paragraph 3 is unreliable" is wrong.
 
