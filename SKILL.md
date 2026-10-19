@@ -299,19 +299,19 @@ Used to choose the issues shown in the Overview and the Focused report.
 
 | Mode | Share of the original | Fixed limit | Rule |
 |------|----------------------|-------------|------|
-| Overview | 30% | 300 Chinese characters / 200 English words | Use whichever is smaller |
-| Focused | 50% | 3000 Chinese characters / 2000 English words | Use whichever is smaller |
+| Overview | 30% | 300 Chinese characters / 300 English words | Use whichever is smaller |
+| Focused | 50% | 3000 Chinese characters / 3000 English words | Use whichever is smaller |
 | Full | None | None | Split long reports into parts |
 
 How to count:
 - Count in the output language. Chinese: remove all spaces and line breaks, then count every character. English: count words.
 - If the report and the article are in different languages, use only the fixed limit.
-- If the share limit falls below 150 Chinese characters / 100 English words (a very short article), use 150 Chinese characters / 100 English words as the limit instead, in the Overview and Focused. The report may then be longer than the article.
+- If the share limit falls below 150 Chinese characters / 150 English words (a very short article), use 150 Chinese characters / 150 English words as the limit instead, in the Overview and Focused. The report may then be longer than the article.
 - Counts are estimates, so aim below the limit.
 - **Not counted:** notices, the audit opinion (the one line in the Overview, the whole block in Focused), the closing offer line, the paper notice, the tool disclosure and the feedback line.
 - **Counted:** everything else, including the article type line and the two count lines.
-- The Overview's audit opinion line has its own limit: 50 Chinese characters / 33 English words.
-- All limits use the same ratio: 3 Chinese characters for every 2 English words.
+- The Overview's audit opinion line has its own limit: 50 Chinese characters / 50 English words.
+- All limits use the same ratio: 1 Chinese character for every English word.
 
 ### Overview
 
