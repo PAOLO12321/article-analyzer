@@ -12,7 +12,7 @@
 Analysis or opinion (business commentary).
 Audit opinion (checked factual claims only): Qualified, 1 measure or scope shift. Checked on [date].
 Factual claims checked: 3 (✅ 2 / ⚠️ 1 / ❌ 0 / 🔍 0 / ❓ 0)
-Other issues: hidden premises 1 · selective presentation 0 · unstated steps 0 · rhetorical devices 3
+Other issues: self-contradictions 0 · hidden premises 1 · selective presentation 0 · unstated steps 0 · rhetorical devices 3
 The most important issues:
 1. 「a 37% gross margin」: ⚠️ [Amazon annual report] gives 37% as AWS's operating margin, not its gross margin.
 2. 「This same pattern will define」: assumes AI markets work like cloud infrastructure; the text does not say why.

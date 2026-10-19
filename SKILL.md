@@ -164,6 +164,7 @@ For 🔍, use the "not found" wording (see Fixed wording). For ❓, give the one
 | Only an AI-generated page supports the claim | ❓, reason "only an AI-generated page was found" |
 | A number that changes over time (ratings, view counts) | Compare with the value nearest the article's publication date, label as normal, and note the date of the value used. If the publication date is unknown, use the latest value and add a notice that the date was not known |
 | A quote translated from another language | Compare the meaning with the original. If it matches, ✅ with the note "translated" |
+| A direct quote whose words differ slightly from the source but keep the meaning | ✅ with the note "wording differs slightly". Only a change of meaning is a Layer 4 rewording |
 
 Report only whether a source was found and whether it matches. Conditions or limits found in other articles do not change the label. Other articles appear only in "Other sources on this topic".
 
@@ -225,7 +226,7 @@ Note: these variables could lead to a different or opposite result.
 
 Whether those variables matter is for the reader to decide.
 
-**Self-contradictions.** Always note any place where the article contradicts itself (40% in one place, 30% in another), without a label. Without web search, this is the only number check.
+**Self-contradictions.** Always note any place where the article contradicts itself, without a label. A self-contradiction is two statements about the same thing, in the same measure and scope, that cannot both be true (40% in one place, 30% in another). Statements about different groups or periods are not a self-contradiction; if the article does not explain how they fit together, report that as an unstated step. Without web search, this is the only number check.
 
 ## Layer 6: Rhetorical devices
 
@@ -338,7 +339,7 @@ No links in the Overview, except the feedback line.
 [Article type, one line]
 Audit opinion (checked factual claims only): [opinion], [reason in a few words]. Checked on [date].
 Factual claims checked: [number] (✅ X / ⚠️ X / ❌ X / 🔍 X / ❓ X)
-Other issues: hidden premises X · selective presentation X · unstated steps X · rhetorical devices X
+Other issues: self-contradictions X · hidden premises X · selective presentation X · unstated steps X · rhetorical devices X
 The most important issues:
 1. 「…」: [issue]
 2. 「…」: [issue]
@@ -351,6 +352,8 @@ The most important issues:
 
 - The counts must come from the analysis you ran.
 - List up to 3 issues, chosen by the Ranking. If there are fewer, list only those. Never pad. If there are none, write "No issues found."
+- Claims with the same issue (two figures from the same calculation, say) may share one item.
+- The reason in the audit opinion line can be a short form of the full reason, to stay within its limit.
 
 ### Focused
 
@@ -374,7 +377,7 @@ Show, in this order:
 ## Summary counts
 - Factual claims checked: [number] (✅ X / ⚠️ X / ❌ X / 🔍 X / ❓ X)
 - Sentences by main function (from Layer 1): factual X% / opinion X% / unverifiable X% / prediction X% / classification uncertain X%. Plot sentences and parts outside scope are left out.
-- Hidden premises: X · Selective presentation: X · Unstated steps: X · Rhetorical devices: X
+- Self-contradictions: X · Hidden premises: X · Selective presentation: X · Unstated steps: X · Rhetorical devices: X
 
 ## Main claim
 
@@ -409,7 +412,7 @@ These are only the most important. Reply 'focused' for the main issues, or 'full
 以上只是最重要的问题。回复“重点”查看主要问题，回复“完整”查看全部。
 ```
 
-**Not found (for 🔍 only; always name what was checked)**
+**Not found (for 🔍 only; always name the sources you opened, not search queries)**
 ```
 No source found: checked [source A] and [source B], found nothing that supports or contradicts it.
 未找到来源：查了[来源A]、[来源B]，没有找到能确认或否定的内容。
@@ -458,6 +461,7 @@ State the problem in the notices at the top of the report.
 | Too many factual claims to check | See "Which factual claims to check" in Layer 2 |
 | Paywall, or the link cannot be opened | Say what you received (title only, first part only). Analyse only that. Ask the user to paste the full text. Never guess the content from the title. |
 | Only a summary or paraphrase of the text | Say results may be incomplete and quotes may not be exact. Ask the user to paste the full text. |
+| Part of the text is abridged or missing (in the middle, for example) | Name the part in a notice, apply the summary rule to that part only, and analyse the rest as normal. |
 | Structured output requested | Do not ask the user anything. State any problem in the notices and continue. |
 | Very long text | The Overview still applies. If a Focused or Full report does not fit in one reply, split it into "Part 1 of N" and so on. For a text as long as a book chapter, first ask which sections to analyse. |
 | Images or screenshots | If you can read the text, analyse it and add the notice "The following text was read from an image". For charts, check only what is legible. |
