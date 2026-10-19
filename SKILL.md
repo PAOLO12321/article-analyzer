@@ -137,7 +137,7 @@ Check every factual claim if you can. If there are too many, check first the one
 | Label | 中文 | When to use |
 |-------|------|-------------|
 | ✅ Accurate | ✅ 准确 | The source matches the claim |
-| ⚠️ Concept shift | ⚠️ 偷换概念 | The source exists, but the article changes the measure or scope of a fact (operating margin reported as gross margin; a figure for one city reported as nationwide) |
+| ⚠️ Measure or scope shift | ⚠️ 口径不一致 | The source exists, but the article changes the measure or scope of a fact (operating margin reported as gross margin; a figure for one city reported as nationwide) |
 | ❌ Factually wrong | ❌ 数据失实 | The source contradicts the claim |
 | 🔍 No source found | 🔍 未找到来源 | You searched and found no source that supports or contradicts the claim |
 | ❓ Uncertain | ❓ 存疑 | None of the four above fits. Always give a one-line reason |
@@ -271,7 +271,7 @@ Used to choose the issues shown in the Overview and the Focused report.
 1. **Relevance first.** An issue that any main claim depends on comes before any issue in a peripheral detail, whatever its type. An issue is something the main claim depends on if the main claim would lose support were the issue true. Issues that different main claims depend on are treated equally.
 2. **Then by type, in three tiers:**
    1. Facts wrong or unclear: ❌, then 🔍 and ❓.
-   2. Concept shift and reasoning: ⚠️, then unstated steps, then hidden premises, then selective presentation.
+   2. Measure or scope shift and reasoning: ⚠️, then unstated steps, then hidden premises, then selective presentation.
    3. Emotional wording.
 3. Other rhetorical devices come after the three tiers.
 4. Within each relevance group, minor citation details (a wrong year or a misspelt author name in a reference) come last.
@@ -299,18 +299,19 @@ Used to choose the issues shown in the Overview and the Focused report.
 
 | Mode | Share of the original | Fixed limit | Rule |
 |------|----------------------|-------------|------|
-| Overview | 30% | 300 Chinese characters / 300 English words | Use whichever is smaller |
+| Overview | 30% | 300 Chinese characters / 200 English words | Use whichever is smaller |
 | Focused | 50% | 3000 Chinese characters / 2000 English words | Use whichever is smaller |
 | Full | None | None | Split long reports into parts |
 
 How to count:
 - Count in the output language. Chinese: remove all spaces and line breaks, then count every character. English: count words.
 - If the report and the article are in different languages, use only the fixed limit.
-- If the share limit falls below 150 Chinese characters / 120 English words (a very short article), use 150 Chinese characters / 120 English words as the limit instead, in the Overview and Focused. The report may then be longer than the article.
+- If the share limit falls below 150 Chinese characters / 100 English words (a very short article), use 150 Chinese characters / 100 English words as the limit instead, in the Overview and Focused. The report may then be longer than the article.
 - Counts are estimates, so aim below the limit.
 - **Not counted:** notices, the audit opinion (the one line in the Overview, the whole block in Focused), the closing offer line, the paper notice, the tool disclosure and the feedback line.
 - **Counted:** everything else, including the article type line and the two count lines.
-- The Overview's audit opinion line has its own limit: 50 Chinese characters / 60 English words.
+- The Overview's audit opinion line has its own limit: 50 Chinese characters / 33 English words.
+- All limits use the same ratio: 3 Chinese characters for every 2 English words.
 
 ### Overview
 
@@ -460,7 +461,7 @@ Structured output always contains the full analysis. The length limits do not ap
     {"quote": "", "category": "factual_claim | analysis_opinion | unverifiable_narrative | prediction | classification_uncertain", "subtype": "feeling | evaluation | personal_story | anonymous_source | vague_citation | null", "status": "analysed | outside_scope | plot_skipped", "note": ""}
   ],
   "claims": [
-    {"quote": "", "label": "accurate | concept_shift | factually_wrong | no_source_found | uncertain | not_checked", "source": "", "source_type": "official_first_hand | original_reporting | secondary", "machine_translated": false, "checked_sources": [""], "note": "", "reason_if_uncertain": ""}
+    {"quote": "", "label": "accurate | scope_shift | factually_wrong | no_source_found | uncertain | not_checked", "source": "", "source_type": "official_first_hand | original_reporting | secondary", "machine_translated": false, "checked_sources": [""], "note": "", "reason_if_uncertain": ""}
   ],
   "hidden_premises": [{"quote": "", "argument": "", "premise": "", "if_fails": ""}],
   "selective_presentation": [{"quote": "", "type": "rewording | partial_use | missing_conditions", "detail": ""}],

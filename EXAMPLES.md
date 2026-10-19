@@ -10,11 +10,11 @@
 
 ```
 Analysis or opinion (business commentary).
-Audit opinion: Qualified, 1 concept shift. Checked on [date].
+Audit opinion: Qualified, 1 measure or scope shift. Checked on [date].
 Factual claims checked: 3 (✅ 2 / ⚠️ 1 / ❌ 0 / 🔍 0 / ❓ 0)
 Other issues: hidden premises 1 · selective presentation 0 · unstated steps 1 · rhetorical devices 2
 The most important issues:
-1. 「gross margins that Microsoft and Google can only dream of」: ⚠️ [company annual reports] give segment operating margins, not comparable gross margins.
+1. 「gross margins that Microsoft and Google can only dream of」: ⚠️ [annual reports] show operating margins, not comparable gross margins.
 2. 「This same pattern will define」: the step from cloud to AI is not stated.
 3. 「which AI companies survive」: assumes AI markets work like cloud infrastructure; the text does not say why.
 These are only the most important. Reply 'focused' for the main problems, or 'full' for everything.
@@ -22,14 +22,14 @@ This analysis is AI-assisted. Verification relies on publicly searchable sources
 Feedback: https://github.com/PAOLO12321/article-analyzer/issues
 ```
 
-Main claim used for ranking: vertical integration plus price cuts is the winning playbook, and it will decide which AI companies survive. All three issues and the emotional wording sit on that claim. Within that group, the tier 2 issues (concept shift, unstated step, hidden premise) come before emotional wording (tier 3), so the emotional wording does not make the top three.
+Main claim used for ranking: vertical integration plus price cuts is the winning playbook, and it will decide which AI companies survive. All three issues and the emotional wording sit on that claim. Within that group, the tier 2 issues (measure or scope shift, unstated step, hidden premise) come before emotional wording (tier 3), so the emotional wording does not make the top three.
 
 ## How each sentence was sorted
 
 | Sentence | Category | Result |
 |----------|----------|--------|
 | 「Amazon's dominance in cloud computing reveals…」 | Analysis or opinion | Contains a factual claim, "Amazon leads cloud computing": ✅ [market-share report]. "Reveals the fundamental playbook" is the author's interpretation. |
-| 「Amazon has achieved gross margins…」 | Factual claim | ⚠️ Concept shift. Rhetorical device: emotional wording, "can only dream of" presents the gap as very large without a figure. |
+| 「Amazon has achieved gross margins…」 | Factual claim | ⚠️ Measure or scope shift. Rhetorical device: emotional wording, "can only dream of" presents the gap as very large without a figure. |
 | 「Industry insiders have long whispered…」 | Unverifiable narrative (anonymous source) | Contains a factual claim, "AWS is profitable": ✅ [Amazon annual report, segment results]. Whether that "subsidizes" retail depends on interpretation, so that part is opinion. |
 | 「This same pattern will define…」 | Prediction | Not verified. |
 | 「Smaller AI startups… walking dead…」 | Analysis or opinion | Rhetorical device: emotional wording, "walking dead". "One prominent VC told me" is an anonymous source. |

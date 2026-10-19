@@ -46,7 +46,7 @@ By default you get a short **overview**: the audit opinion, the fact-check count
 | Layer | What it does |
 |-------|-------------|
 | 1. Main claim and classification | States the article's main claim, then sorts each sentence into one of four categories |
-| 2. Fact verification | Checks each factual claim and gives one of five fixed labels: ✅ Accurate, ⚠️ Concept shift, ❌ Factually wrong, 🔍 No source found, ❓ Uncertain (with a reason) |
+| 2. Fact verification | Checks each factual claim and gives one of five fixed labels: ✅ Accurate, ⚠️ Measure or scope shift, ❌ Factually wrong, 🔍 No source found, ❓ Uncertain (with a reason) |
 | 3. Hidden premises | Finds the assumptions an argument needs but does not state |
 | 4. Selective presentation | Compares each claim with its own source: rewording, partial use of the source, missing conditions |
 | 5. Reasoning chain | Maps the reasoning and marks the steps the article does not state |
