@@ -22,7 +22,7 @@ This analysis is AI-assisted. Verification relies on publicly searchable sources
 Feedback: https://github.com/PAOLO12321/article-analyzer/issues
 ```
 
-Main claim used for ranking: vertical integration plus price cuts is the winning playbook, and it will decide which AI companies survive. All three issues sit on that claim, so they rank above the emotional wording.
+Main claim used for ranking: vertical integration plus price cuts is the winning playbook, and it will decide which AI companies survive. All three issues and the emotional wording sit on that claim. Within that group, the tier 2 issues (concept shift, unstated step, hidden premise) come before emotional wording (tier 3), so the emotional wording does not make the top three.
 
 ## How each sentence was sorted
 

@@ -16,7 +16,7 @@ Most online writing mixes checkable facts, opinions, predictions and framing int
 | Sort every sentence into fact, opinion, unverifiable narrative or prediction | Say whether an article is good or bad |
 | Check factual claims against sources, preferring official first-hand data | Call something false because no source was found |
 | Surface hidden premises and unstated reasoning steps | Replace your own judgement in a specialist field |
-| Flag rewording, partial use of a source and missing conditions | Analyse content whose purpose is to evaluate a politician, government, political party or state body; judge whether a religion is true; or analyse content meant to help someone commit a crime |
+| Flag rewording, partial use of a source and missing conditions | Analyse content whose purpose is to evaluate a politician, government, political party or state body; judge whether a religion is true; or analyse content meant to help someone commit a crime or cause harm |
 | Note rhetorical devices next to the sentences they appear in | Analyse feelings or taste in writing about art, photography, music, film, entertainment, sport, fashion or poetry |
 | Give an audit opinion on the checked facts, with the date of the check | Give a "negative" opinion |
 
@@ -52,7 +52,7 @@ By default you get a short **overview**: the audit opinion, the fact-check count
 | 5. Reasoning chain | Maps the reasoning and marks the steps the article does not state |
 | 6. Rhetorical devices | Notes framing such as authority without a source, emotional wording or an analogy applied beyond its domain |
 
-Before Layer 1, a content screener decides the route. News is checked for accuracy against the most credible source, ideally official first-hand data. Writing about art, photography, music, film, entertainment, sport, fashion or poetry skips plot summary and only checks objective facts. Academic papers get a notice that the report does not replace reading the paper.
+Before Layer 1, a content screener decides the route. News is checked for accuracy against the most credible source, ideally official first-hand data. Writing about art, photography, music, film, entertainment, sport, fashion or poetry skips plot summary (except cast, roles and premise) and only checks objective facts. Academic papers get a notice that the report does not replace reading the paper.
 
 ## The audit opinion
 
@@ -71,7 +71,7 @@ See [EXAMPLES.md](EXAMPLES.md) for one paragraph before and after.
 ## Design principles
 
 1. **Verify and deconstruct; do not judge.** "Not found" means not found, not false.
-2. **No value judgements.** Describe structure ("three unverified steps"), not quality ("weak").
+2. **No value judgements.** Describe structure ("three unstated steps"), not quality ("weak").
 3. **Serve the reader.** Neutral towards the author.
 4. **Never say whether an article is worth your time.** The report gives descriptive facts; you decide.
 5. **Never lower quality silently.** If something could not be done (no web search, a paywall, too many claims), the report says so at the top.

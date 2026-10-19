@@ -1,7 +1,7 @@
 ---
 name: article-analyzer
 description: |
-  Article Deconstructor / 信息拆解器: structured analysis of articles in any language. Separates facts, opinions, predictions and unverifiable claims, checks factual claims against sources, and surfaces hidden premises, selective presentation, unstated reasoning steps and rhetorical framing. Gives a short overview by default, with a focused or full breakdown on request. Use when users say "analyze this article", "break this down", "fact check", "is this article accurate", "deconstruct", "what's wrong with this argument", or in Chinese: "分析文章"、"拆解"、"事实核查"、"区分事实和观点"、"验证声称"、"分析论证质量"、"帮我看看这篇文章"、"这篇文章说的对吗"、"帮我拆一下". Does not analyse content whose purpose is to evaluate a politician, government, political party or state body, or whether a religion is true.
+  Article Deconstructor / 信息拆解器: structured analysis of articles in any language. Separates facts, opinions, predictions and unverifiable claims, checks factual claims against sources, and surfaces hidden premises, selective presentation, unstated reasoning steps and rhetorical framing. Gives a short overview by default, with a focused or full breakdown on request. Use when users say "analyze this article", "break this down", "fact check", "is this article accurate", "deconstruct", "what's wrong with this argument", or in Chinese: "分析文章"、"拆解"、"事实核查"、"区分事实和观点"、"验证声称"、"分析论证质量"、"帮我看看这篇文章"、"这篇文章说的对吗"、"帮我拆一下". Does not analyse content whose purpose is to evaluate a politician, government, political party or state body, or to help someone commit a crime or cause harm; does not evaluate whether a religion is true.
 ---
 
 # Article Deconstructor
@@ -37,7 +37,7 @@ Before any analysis, decide what kind of text this is. The type decides the rout
 | Out of scope | See the red lines | Red-line response |
 | Not an article | An advert, a chat log, code: no claims | Say this framework does not apply |
 
-**Standard route:** run Layers 1 to 6 as written. The other routes change only what their own section says. Every route runs all six layers.
+**Standard route:** run Layers 1 to 6 as written. The other routes change only what their own section says. Every route runs all six layers, unless "When something goes wrong" says otherwise.
 
 If a text mixes types, follow the route for its main purpose and say so in the article type line.
 
@@ -62,7 +62,7 @@ A story being very recent does not by itself make it unconfirmable. Check claim 
 ### Strong-feeling route
 
 - Check objective facts only: dates, names, authorship, technique, exhibitions, awards, ratings, sale prices, business facts.
-- **Plot or content summary: do not count plot sentences as factual claims.** Check only the basic facts (cast, roles, premise) against an official synopsis. Add a notice saying plot summary was not checked.
+- **Plot or content summary: do not count plot sentences as factual claims.** Check only the basic facts (cast, roles, premise) against an official synopsis. Add the notice: "Plot summary was not checked, except cast, roles and premise."
 - Label two kinds of opinion, and analyse neither:
   - **Feeling**: the author's own experience ("this photograph makes me feel alone").
   - **Evaluation**: a judgement about the work ("his best work", "a failure").
@@ -137,14 +137,14 @@ Check every factual claim if you can. If there are too many, check first the one
 | Label | 中文 | When to use |
 |-------|------|-------------|
 | ✅ Accurate | ✅ 准确 | The source matches the claim |
-| ⚠️ Concept shift | ⚠️ 偷换概念 | The source exists, but the article changes the measure or scope of a fact (operating margin reported as gross margin; "may be affected" reported as "will be replaced") |
+| ⚠️ Concept shift | ⚠️ 偷换概念 | The source exists, but the article changes the measure or scope of a fact (operating margin reported as gross margin; a figure for one city reported as nationwide) |
 | ❌ Factually wrong | ❌ 数据失实 | The source contradicts the claim |
 | 🔍 No source found | 🔍 未找到来源 | You searched and found no source that supports or contradicts the claim |
 | ❓ Uncertain | ❓ 存疑 | None of the four above fits. Always give a one-line reason |
 
 If you are not sure which label fits, use ❓ with a reason. Never invent a label. Predictions, opinions and unverifiable narratives do not get a label.
 
-For 🔍, always say what was checked, using the "not found" wording (see Fixed wording). Not found does not mean false.
+For 🔍, always say what was checked, using the "not found" wording (see Fixed wording). Not found does not mean false. ❓ keeps its own one-line reason instead.
 
 ### Label rules for special cases
 
@@ -245,9 +245,11 @@ The audit opinion covers **checked factual claims only**. Always say so, and alw
 Unable to opine applies when:
 1. the whole text falls under a red line;
 2. the text has fewer than 3 factual claims;
-3. selective presentation affects most of the claims the main claim depends on;
+3. more than half of the factual claims the main claim depends on show a Layer 4 pattern (including those counted only as ⚠️);
 4. no web search was available;
-5. more than half of the checked factual claims are 🔍 or ❓ (reason: "most claims could not be confirmed").
+5. more than half of the checked factual claims are 🔍 or ❓ (reason: "more than half of the checked factual claims are 🔍 or ❓").
+
+Condition 2 does not apply to the strong-feeling route, where most sentences are feelings, evaluations or plot.
 
 **Never give a "negative" opinion.** Even if every claim is wrong, give a Qualified opinion and list the problems.
 
@@ -266,10 +268,10 @@ Checked on: [date]
 
 Used to choose the issues shown in the Overview and the Focused report.
 
-1. **Relevance first.** An issue that any main claim depends on comes before any issue in a peripheral detail, whatever its type. Issues that different main claims depend on are treated equally.
+1. **Relevance first.** An issue that any main claim depends on comes before any issue in a peripheral detail, whatever its type. An issue is something the main claim depends on if the main claim would lose support were the issue true. Issues that different main claims depend on are treated equally.
 2. **Then by type, in three tiers:**
    1. Facts wrong or unclear: ❌, then 🔍 and ❓.
-   2. Concept shift and reasoning: ⚠️, unstated steps, hidden premises, selective presentation.
+   2. Concept shift and reasoning: ⚠️, then unstated steps, then hidden premises, then selective presentation.
    3. Emotional wording.
 3. Other rhetorical devices come after the three tiers.
 4. Within each relevance group, minor citation details (a wrong year or a misspelt author name in a reference) come last.
@@ -282,7 +284,7 @@ Used to choose the issues shown in the Overview and the Focused report.
 
 ## Output modes
 
-**Always run all six layers, whatever the mode.** The mode only controls what you show.
+**Always run all six layers, whatever the mode, unless "When something goes wrong" says otherwise.** The mode only controls what you show.
 
 - If the user asks for a mode, use it: **Overview** ("quick look", 速览), **Focused** ("focused", 重点), **Full** ("full", 完整).
 - Otherwise, give the Overview.
@@ -304,7 +306,7 @@ Used to choose the issues shown in the Overview and the Focused report.
 How to count:
 - Count in the output language. Chinese: remove all spaces and line breaks, then count every character. English: count words.
 - If the report and the article are in different languages, use only the fixed limit.
-- If the share limit falls below 150 Chinese characters / 120 English words (a very short article), use that as the limit instead.
+- If the share limit falls below 150 Chinese characters / 120 English words (a very short article), use 150 Chinese characters / 120 English words as the limit instead, in the Overview and Focused. The report may then be longer than the article.
 - Counts are estimates, so aim below the limit.
 - **Not counted:** notices, the audit opinion (the one line in the Overview, the whole block in Focused), the closing offer line, the paper notice, the tool disclosure and the feedback line.
 - **Counted:** everything else, including the article type line and the two count lines.
@@ -380,12 +382,12 @@ Search for other sources on the same topic. Give a link and one relevant quote f
 
 ## Fixed wording
 
-Write each in the output language. Use exactly the text inside the code blocks.
+For English and Chinese output, use exactly the text inside the code blocks. For other languages, translate it faithfully.
 
 **Closing offer line (Overview only)**
 ```
 These are only the most important. Reply 'focused' for the main problems, or 'full' for everything.
-以上只是最重要的问题。回复「重点」查看主要问题，回复「完整」查看全部。
+以上只是最重要的问题。回复“重点”查看主要问题，回复“完整”查看全部。
 ```
 
 **Not found** (for 🔍 and for "cannot be confirmed"; always name what was checked)
@@ -398,9 +400,9 @@ Never write only "not found" or "cannot be confirmed". The reader must be able t
 **Red-line response**
 ```
 This tool does not give an opinion on this article.
-Audit opinion: Unable to opine (outside this tool's scope).
+Audit opinion: Unable to opine (outside this tool's scope). Checked on [date].
 本工具不对这篇文章给出意见。
-审计意见：无法表示意见（不在本工具范围内）。
+审计意见：无法表示意见（不在本工具范围内）。核查日期：[日期]。
 ```
 
 **Paper notice**
@@ -447,6 +449,7 @@ Structured output always contains the full analysis. The length limits do not ap
 ```json
 {
   "article_type": "news | analysis | strong_feeling | paper | out_of_scope | not_an_article",
+  "mixed_type_note": "",
   "article_language": "",
   "output_language": "",
   "text_completeness": "full | partial | summary_only",
@@ -461,7 +464,9 @@ Structured output always contains the full analysis. The length limits do not ap
   ],
   "hidden_premises": [{"quote": "", "argument": "", "premise": "", "if_fails": ""}],
   "selective_presentation": [{"quote": "", "type": "rewording | partial_use | missing_conditions", "detail": ""}],
-  "unstated_steps": [{"from": "", "to": "", "steps": [""]}],
+  "reasoning_chains": [{"chain": "", "unstated_steps": [""], "variables_not_covered": [""]}],
+  "self_contradictions": [""],
+  "information_mix": {"factual": 0, "opinion": 0, "unverifiable": 0, "prediction": 0},
   "rhetoric": [{"quote": "", "device": "", "description": ""}],
   "top_issues": ["up to 3 items; fewer if there are fewer; empty if none"],
   "other_sources": [{"name": "", "link": "", "quote": ""}],
@@ -478,7 +483,7 @@ Structured output always contains the full analysis. The length limits do not ap
 Fix anything that fails before you output the report.
 
 1. Only the five verification labels are used
-2. Every ✅ ⚠️ ❌ names its source, in every mode
+2. Every ✅ ⚠️ ❌ claim that is shown names its source
 3. No evaluative words of your own (good, bad, misleading, misconception and so on), including in the names of categories and devices
 4. All six layers were run, or the skipped ones are explained
 5. Anything that could not be done is stated in the notices
