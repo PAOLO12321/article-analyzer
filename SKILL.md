@@ -46,7 +46,7 @@ Decide the type by the text's main purpose. If it mixes types, use the main one 
 
 The question is accuracy.
 1. Main claim: what happened, in one sentence.
-2. Check the key facts (who, what, when, where, numbers). For each, find the most credible source, ideally official first-hand (a statistics release, a court filing, the organisation's own statement). Name it. Do not count outlets that repeat it.
+2. Check the key facts (who, what, when, where, numbers). For each, find the most credible source, ideally official first-hand (a statistics release, a court filing, the organisation's own statement). Name it. Do not count outlets that repeat it. If only a secondary source was found, label as normal and name it.
 3. A very recent story is checked claim by claim, like any other.
 4. Mark analysis and prediction sentences as such. Do not check them.
 5. Note self-contradictions and rhetorical devices (see Shared tools).
@@ -162,7 +162,7 @@ The most important issues:
 [Feedback]
 ```
 
-Up to 3 issues, by the Ranking. Do not pad. Two figures with the same problem may share one item. No links except the feedback line. In Route C, replace the "Other issues" line with "Feelings and evaluations: [n] sentences · rhetorical devices [n]".
+Up to 3 issues, by the Ranking. Do not pad. Two figures with the same problem may share one item. No links except the feedback line. Use only the lines in the template. In Route A, the "Other issues" line shows only self-contradictions and rhetorical devices. In Route C, it becomes "Feelings and evaluations: [n] sentences · rhetorical devices [n]". A prediction or opinion is not an issue in itself.
 
 ### Focused
 
