@@ -17,7 +17,7 @@ Most online writing mixes checkable facts, opinions, predictions and framing int
 | Check factual claims against sources, preferring official first-hand data | Call something false because no source was found |
 | Surface hidden premises and unstated reasoning steps | Replace your own judgement in a specialist field |
 | Flag rewording, partial use of a source and missing conditions | Analyse content whose purpose is to evaluate a politician, government, political party or state body; judge whether a religion is true; or analyse content meant to help someone commit a crime or cause harm |
-| Note rhetorical devices next to the sentences they appear in | Analyse feelings or taste in writing about art, photography, music, film, entertainment, sport, fashion or poetry |
+| Note rhetorical devices next to the sentences they appear in | Analyse feelings or taste in writing about art, photography, music, film, entertainment, sport, fashion or poetry (it labels them and checks the facts around them) |
 | Give an audit opinion on the checked facts, with the date of the check | Give a "negative" opinion |
 
 ## Installation
@@ -32,14 +32,14 @@ Other agents that support `SKILL.md` skills can load the same file.
 
 ## How to use it
 
-Paste the full text of an article (this works best) or a link, and ask in any language:
+Paste the full text of an article (this works best) or a link, and ask in any language. News, analysis, opinion pieces, adverts, reviews and academic papers all work. Chat logs, code and other texts that do not inform or argue are not analysed.
 
 - "Analyze this article: [text or link]"
 - "Fact-check this"
 - "拆解这篇文章"
 - "帮我看看这篇文章"
 
-By default you get a short **overview**: the audit opinion, the fact-check counts and up to three of the most important issues. Ask for **focused** (重点) for the main problems in article order, or **full** (完整) for everything. Reports are written in the language you ask in. Ask for JSON if you want structured output for a pipeline.
+By default you get a short **overview**: the audit opinion, the fact-check counts and up to three of the most important issues. Ask for **focused** (重点) for the main issues in article order, or **full** (完整) for everything. Reports are written in the language you ask in. Ask explicitly for JSON (or name a schema) if you want structured output for a pipeline.
 
 ## The six layers
 
@@ -50,17 +50,17 @@ By default you get a short **overview**: the audit opinion, the fact-check count
 | 3. Hidden premises | Finds the assumptions an argument needs but does not state |
 | 4. Selective presentation | Compares each claim with its own source: rewording, partial use of the source, missing conditions |
 | 5. Reasoning chain | Maps the reasoning and marks the steps the article does not state |
-| 6. Rhetorical devices | Notes framing such as authority without a source, emotional wording or an analogy applied beyond its domain |
+| 6. Rhetorical devices | Notes framing such as opinion presented as fact, authority without a source, emotional wording or an analogy applied beyond its original domain |
 
-Before Layer 1, a content screener decides the route. News is checked for accuracy against the most credible source, ideally official first-hand data. Writing about art, photography, music, film, entertainment, sport, fashion or poetry skips plot summary (except cast, roles and premise) and only checks objective facts. Academic papers get a notice that the report does not replace reading the paper.
+Before Layer 1, a content screener decides the route. News is checked for accuracy against the most credible source, ideally official first-hand data. Writing about art, photography, music, film, entertainment, sport, fashion or poetry (the creative-work route) skips plot summary (except cast, roles and premise), labels feelings and evaluations without arguing with them, and checks objective facts. A report of an event in those fields, such as a match result, is treated as news. Academic papers get a notice that the report does not replace reading the paper.
 
 ## The audit opinion
 
 Modelled on financial audit opinions, and limited to the factual claims that were checked:
 
 - **Unqualified**: every checked claim is accurate
-- **Qualified**: at least one claim is not accurate or could not be confirmed; each is listed
-- **Unable to opine**: out of scope, fewer than three factual claims, selective presentation affecting most of what the main claim rests on, no web search, or most claims could not be confirmed
+- **Qualified**: at least one checked claim is not accurate or could not be confirmed; each is listed
+- **Unable to opine**: out of scope, fewer than three factual claims (not applied to creative-work writing), a measure or scope shift or selective presentation in more than half of the checked claims the main claim depends on, no web search, or more than half of the checked claims could not be confirmed
 
 There is no "negative" opinion. Even if every claim is wrong, the opinion is Qualified with the problems listed.
 
@@ -75,6 +75,7 @@ See [EXAMPLES.md](EXAMPLES.md) for one paragraph before and after.
 3. **Serve the reader.** Neutral towards the author.
 4. **Never say whether an article is worth your time.** The report gives descriptive facts; you decide.
 5. **Never lower quality silently.** If something could not be done (no web search, a paywall, too many claims), the report says so at the top.
+6. **Never check facts from memory.** Only sources the agent actually opened count.
 
 ## Limitations
 
