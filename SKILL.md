@@ -49,11 +49,10 @@ If only part of the text falls under a red line, analyse the rest. Mark the skip
 
 ### News route
 
-Accuracy is the main question for news, so news has a stricter standard than other texts.
+Accuracy is the main question for news.
 
-- **Two independent sources for ✅.** Check each key factual claim against at least two independent sources. Report where they agree and where they differ.
-- **One source only.** Label the claim ❓ with the reason "only one source so far". Do not guess.
-- **Very recent stories.** Being recent does not by itself make a story unconfirmable. Check claim by claim: some facts may already have two independent sources within hours, others may not.
+- **Say how many sources.** For each key factual claim, search for independent sources and write how many you found, for example "✅ (3 independent sources)" or "✅ (1 source)". Report where they agree and where they differ.
+- **Very recent stories.** Check claim by claim. Being recent does not by itself make a story unconfirmable: some facts may already have several sources within hours, others only one.
 - Copies of the same wire story count as one source.
 
 ### Strong-feeling route
@@ -150,7 +149,7 @@ If you are not sure which label fits, use ❓ Uncertain with a reason. Never inv
 - A quote translated from another language: compare its meaning with the original. If the meaning matches, ✅ with the note "translated".
 - In this version, report only whether a source was found and whether it matches. Do not add conditions or limits found in other articles.
 
-**Standard per route.** News needs two independent sources for ✅ (see News route). Other texts need one opened source.
+**News.** For news, also write how many independent sources were found for each claim (see News route).
 
 **Overlap with Layer 4.** If a claim changes the meaning of its source, label it ⚠️ here and also show it in Layer 4. Count it once.
 
