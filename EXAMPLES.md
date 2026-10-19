@@ -4,24 +4,32 @@
 
 ## The original
 
-> (1) Amazon's dominance in cloud computing reveals the fundamental playbook for tech monopolies: vertical integration plus relentless price cuts. (2) Amazon has achieved gross margins that Microsoft and Google can only dream of. (3) Industry insiders have long whispered that AWS profits subsidize Amazon's entire retail operation. (4) This same pattern will define which AI companies survive the next decade. (5) Smaller AI startups without their own infrastructure are essentially walking dead, as one prominent VC recently told me.
+> Amazon's dominance in cloud computing reveals the fundamental playbook for tech monopolies: vertical integration plus relentless price cuts. Amazon has achieved gross margins that Microsoft and Google can only dream of. Industry insiders have long whispered that AWS profits subsidize Amazon's entire retail operation. This same pattern will define which AI companies survive the next decade. Smaller AI startups without their own infrastructure are essentially walking dead, as one prominent VC recently told me.
 
-## What the tool returns
+## What the tool returns (overview)
 
-| # | Type | Result |
-|---|------|--------|
-| 1 | Fact + opinion | "Amazon leads cloud computing" is a factual claim: ✅ Accurate. "Reveals the fundamental playbook" is the author's interpretation. |
-| 2 | Fact | ⚠️ Concept shift. Public filings disclose segment operating margins, not comparable gross margins. Rhetoric: "can only dream of" inflates the comparison. |
-| 3 | Unverifiable narrative + fact | "Industry insiders whispered" is an anonymous source. The subsidy claim itself: ❓ Uncertain. Reason: filings show AWS as a separate profitable segment, but whether that is "subsidizing" retail depends on interpretation. |
-| 4 | Prediction | Not verified. A claim about the future. |
-| 5 | Opinion + unverifiable narrative | "Walking dead" is emotional framing. "One prominent VC told me" is an anonymous source. |
+```
+Analysis or opinion (business commentary).
+Audit opinion: Qualified, 1 concept shift and 1 claim not confirmed. Checked on [date].
+Factual claims: 3 (✅ 1 / ⚠️ 1 / ❌ 0 / 🔍 0 / ❓ 1)
+Other issues: hidden premises 1 · selective presentation 0 · logic jumps 1 · rhetorical devices 2
+The most important issues:
+1. 「gross margins that Microsoft and Google can only dream of」: ⚠️ public filings give segment operating margins, not comparable gross margins.
+2. 「This same pattern will define」: the step from "Amazon won cloud this way" to "this decides who survives in AI" is not stated. It assumes AI markets work like cloud infrastructure.
+3. 「AWS profits subsidize Amazon's entire retail operation」: ❓ filings show AWS as a separate profitable segment; whether that is "subsidizing" retail depends on interpretation. The claim is attributed to anonymous "industry insiders".
+These are only the most important. Reply "focused" to see them all.
+```
 
-**Hidden premise.** The argument assumes AI markets will work like cloud infrastructure. The paragraph does not say why.
+## How each sentence was sorted
 
-**Logical jump.** From "Amazon won cloud this way" (1) to "this decides who survives in AI" (4). The steps in between are not stated.
-
-**Audit opinion: Qualified.** Covers the 3 factual claims only: ✅ 1 / ⚠️ 1 / ❓ 1. Opinions and predictions are not covered.
+| Sentence | Category | Result |
+|----------|----------|--------|
+| 「Amazon's dominance in cloud computing reveals…」 | Fact + opinion | "Amazon leads cloud computing": ✅. "Reveals the fundamental playbook" is the author's interpretation. |
+| 「Amazon has achieved gross margins…」 | Fact | ⚠️ Concept shift. Rhetoric: "can only dream of" inflates the comparison. |
+| 「Industry insiders have long whispered…」 | Unverifiable narrative + fact | Anonymous source. The subsidy claim itself: ❓. |
+| 「This same pattern will define…」 | Prediction | Not verified. |
+| 「Smaller AI startups… walking dead…」 | Opinion + unverifiable narrative | "Walking dead" is emotional wording. "One prominent VC told me" is an anonymous source. |
 
 ---
 
-In real use, every verification result also lists the source it was checked against. Results here are illustrative.
+In real use, every verification result also names the source it was checked against. Results here are illustrative.

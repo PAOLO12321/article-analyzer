@@ -1,118 +1,97 @@
 # article-analyzer
 
-A Claude skill that deconstructs articles into their structural components — facts, opinions, hidden premises, logical jumps, and rhetorical framing — so you can see what's actually being claimed and how.
+An AI agent skill that takes an article apart: facts, opinions, predictions, hidden premises, logical jumps and rhetorical framing. It checks the factual claims against sources and shows you what is actually being claimed.
 
-**What it is:** A six-layer analysis framework, packaged as a Claude skill.
-**What it isn't:** A judge. The tool never says "this article is wrong" — it says "this article claims X; the primary source says Y; here are the steps in between."
+**What it is:** a six-layer analysis framework, packaged as a skill (`SKILL.md`).
+**What it isn't:** a judge. It never says "this article is wrong". It says "the article claims X; the source says Y".
 
 ## Why this exists
 
-Most online writing mixes verifiable facts, the author's opinions, predictions, and rhetorical framing into one continuous stream. A reader who wants to think clearly has to do the un-mixing themselves — and that work is exhausting, especially across topics where you don't have domain expertise.
+Most online writing mixes checkable facts, opinions, predictions and framing into one stream. Separating them is slow work, especially outside your own field. This skill does the separating and reports what it finds. The conclusion is yours.
 
-This skill performs that un-mixing structurally and reports what it finds, without telling you what to conclude.
-
-## What it does vs. doesn't do
+## What it does and doesn't do
 
 | ✅ Does | ❌ Doesn't |
 |--------|-----------|
-| Classify every sentence into one of four types (fact, opinion, unverifiable narrative, prediction) | Tell you whether the article is "good" or "bad" |
-| Search for primary sources of factual claims | Claim a piece is "fake news" — "no source found" ≠ "false" |
-| Surface hidden premises an argument depends on | Replace your own judgment in specialized domains |
-| Map the logical chain and flag unverified jumps | Evaluate specific officials, governments or organisations, or whether a religion is true |
-| Tag rhetorical devices in context | Analyse feelings in art, music, film or sport writing (only objective facts are checked) |
-| Issue an audit opinion limited to factual claims only | Issue a "negative opinion" — only "unqualified / qualified / unable to opine" |
+| Sort every sentence into fact, opinion, unverifiable narrative or prediction | Say whether an article is good or bad |
+| Check factual claims against sources, preferring official first-hand data | Call something false because no source was found |
+| Surface hidden premises and logical jumps | Replace your own judgement in a specialist field |
+| Flag rewording, cherry-picking and missing conditions | Evaluate specific officials, governments or organisations, or whether a religion is true |
+| Note rhetorical devices next to the sentences they appear in | Analyse feelings or taste in reviews of art, film, music or sport |
+| Give an audit opinion on the checked facts, with the date of the check | Give a "negative" opinion |
 
 ## Installation
 
-This is a Claude skill, designed to be loaded by Claude Code or any Claude environment that supports skills.
+Download the skill folder and put it where your agent loads skills from. For Claude Code:
 
 ```bash
-# Clone into your Claude skills directory
 git clone https://github.com/PAOLO12321/article-analyzer.git ~/.claude/skills/article-analyzer
 ```
 
-Or copy `SKILL.md` into wherever your Claude environment loads skills from.
+Other agents that support `SKILL.md` skills can load the same file.
 
 ## How to use it
 
-Once installed, trigger the skill with any of the following in Chinese or English:
+Paste the full text of an article (this works best) or a link, and ask in any language:
 
-- "Analyze this article: [paste text or URL]"
-- "Break this down"
+- "Analyze this article: [text or link]"
 - "Fact-check this"
 - "拆解这篇文章"
 - "帮我看看这篇文章"
 
-The skill activates automatically when these phrases are detected. By default it returns a short overview: the factual check result and the three most important issues. Ask for "focused" or "full" for a deeper breakdown. Reports are written in the language you use to ask.
+By default you get a short **overview**: the audit opinion, the fact-check counts and the most important issues. Ask for **focused** (重点) for the main problems in article order, or **full** (完整) for everything. Reports are written in the language you ask in. Ask for JSON if you want structured output for a pipeline.
 
-## The six-layer framework
+## The six layers
 
 | Layer | What it does |
 |-------|-------------|
-| 1. Sentence classification | Sort every sentence into: factual claim / opinion / unverifiable narrative / prediction |
-| 2. Fact verification | Search primary sources for each factual claim. Mark with one of five fixed labels: ✅ Accurate, ⚠️ Concept shift, ❌ Factually wrong, 🔍 No source found, or ❓ Uncertain (with a stated reason) |
-| 3. Hidden premises | Identify assumptions the argument depends on but doesn't state |
-| 4. Selective presentation | Compare to primary sources — does the article rewrite, cherry-pick, or strip context? |
-| 5. Logical chain | Map the reasoning path; flag jumps where steps are skipped |
-| 6. Rhetorical device tagging | Note framing techniques inline (pseudo-authority, emotional loading, over-extended analogy, etc.) |
+| 1. Main claim and classification | States the article's main claim, then sorts each sentence into one of four categories |
+| 2. Fact verification | Checks each factual claim and gives one of five fixed labels: ✅ Accurate, ⚠️ Concept shift, ❌ Factually wrong, 🔍 No source found, ❓ Uncertain (with a reason) |
+| 3. Hidden premises | Finds the assumptions an argument needs but does not state |
+| 4. Selective presentation | Compares each claim with its own source: rewording, cherry-picking, missing conditions |
+| 5. Logical chain | Maps the reasoning and marks the steps that are skipped |
+| 6. Rhetorical devices | Notes framing such as pseudo-authority, emotional wording or a stretched analogy |
 
-A separate four-category classifier runs in layer 1, with explicit handling for tricky cases: analytical descriptions that sound factual, facts embedded in opinion paragraphs, opinions that slide in at the end of factual reporting, pseudo-authority phrasing ("research shows..."), and quotes with author-added emotional framing.
+Before Layer 1, a content screener decides the route. News is checked for accuracy against the most credible source. Reviews of art, film, music and sport skip plot summary and only check objective facts. Academic papers get a notice that the report does not replace reading the paper.
 
-## Output: the audit opinion
+## The audit opinion
 
-The skill ends every report with a structured opinion, modeled on financial audit opinions but applied to factual claims only:
+Modelled on financial audit opinions, and limited to the factual claims that were checked:
 
-- **Unqualified (无保留)** — all factual claims verified consistent with primary sources
-- **Qualified (保留)** — some factual claims inconsistent; specific issues listed
-- **Unable to opine (无法表示)** — content red line, too few verifiable claims, or selective presentation too severe to assess by individual claims
+- **Unqualified**: every checked claim is accurate
+- **Qualified**: at least one claim is not accurate or could not be confirmed; each is listed
+- **Unable to opine**: a red line, too few checkable claims, no web search, or most claims could not be confirmed
 
-The skill never issues a "negative" opinion. Even if every factual claim turns out to be inaccurate, it issues a Qualified opinion listing the specific problems — leaving the conclusion to the reader.
+There is no "negative" opinion. Even if every claim is wrong, the opinion is Qualified with the problems listed.
 
 ## Example
 
-See [EXAMPLES.md](EXAMPLES.md) for a short before-and-after: one fabricated paragraph and what the tool returns for it.
+See [EXAMPLES.md](EXAMPLES.md) for one paragraph before and after.
 
 ## Design principles
 
-Four rules govern the skill's behavior:
-
-1. **Verify and deconstruct; do not judge.** Output "the article says X; the primary source says Y." "Not found" means "not found" — not "false."
-
-2. **No value judgments.** Describe argument quality structurally ("this paragraph crosses three unverified steps from premise to conclusion") rather than evaluatively ("this argument is weak").
-
-3. **Serve the reader, not the critic.** Tone is neutral; the analysis is for the person who submitted the article, not against the author.
-
-4. **Content routes and red lines.**
-   - News: accuracy comes first. Breaking or single-source stories are reported as not yet confirmable; other news is cross-checked against independent sources.
-   - Art, photography, music, film, entertainment, sport, fashion: only objective facts are checked. The author's feelings and evaluations are labelled separately.
-   - Politics: the skill does not evaluate specific officials, governments or organisations. Policies can be analysed.
-   - Religion: the skill does not evaluate whether a religion is true or right. Religion as thought or culture can be analysed.
-   - Illegal or unethical content is not analysed.
+1. **Verify and deconstruct; do not judge.** "Not found" means not found, not false.
+2. **No value judgements.** Describe structure ("three unverified steps"), not quality ("weak").
+3. **Serve the reader.** Neutral towards the author.
+4. **Never lower quality silently.** If something could not be done (no web search, a paywall, too many claims), the report says so at the top.
 
 ## Limitations
 
-Verification is bounded by what's publicly searchable. Paywalled academic papers, paid databases, and offline sources may be invisible to the tool. "🔍 No source found" is reported honestly rather than treated as evidence of falsity.
+- Verification is limited to what can be found publicly. Paywalled papers, paid databases and offline sources may be out of reach.
+- Without a web search tool the skill does not verify facts. It says so rather than guessing from memory.
+- The structural analysis reflects the model's reading and can be wrong, especially in specialist fields.
+- The framework was first built on Chinese writing. It now writes reports in the user's language, but some patterns specific to other languages may be missed.
 
-Analytical layers reflect the model's structural understanding and may contain errors, especially in highly specialized domains.
+## Feedback
 
-The skill does not replace domain expertise. When a logical-chain analysis flags missing variables in a specialized field, the tool says those variables exist — judging how much they matter still requires the reader's knowledge.
+Please open an issue: https://github.com/PAOLO12321/article-analyzer/issues
 
-English support is functional, not native. The framework was designed and tested primarily on Chinese-language writing; English handling works but may miss patterns specific to English-language rhetorical traditions.
-
-## Contributing
-
-Issues and pull requests welcome, especially:
-
-- Edge cases the current four-category classifier mis-handles
-- Rhetorical devices common in English-language writing that aren't currently tagged
-- Examples of articles where the framework gives misleading or unhelpful output
+Especially useful: sentences the classifier gets wrong, rhetorical devices it misses, and articles where the report is misleading or unhelpful.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
 
-You may use, modify, and redistribute, including for commercial purposes. Attribution required.
+## Acknowledgements
 
-## Acknowledgments
-
-Designed by Paolo as part of a larger project on information deconstruction tools. The "audit opinion" pattern is borrowed from financial auditing conventions.
+Designed by Paolo as part of a larger project on information deconstruction tools. The audit opinion pattern is borrowed from financial auditing.
