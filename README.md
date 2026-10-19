@@ -1,5 +1,9 @@
 # article-analyzer
 
+> **Note:** analysis takes a while, because each fact is checked against sources. You can send several articles at once. Keep your computer on and connected to the internet while it runs.
+>
+> **提示：** 拆解速度较慢，因为每条事实都要查来源。建议一次发送多篇文章，并保持电脑联网、开机运行。
+
 An AI agent skill that takes an article apart: facts, opinions, predictions, hidden premises, unstated reasoning steps and rhetorical framing. It checks the factual claims against sources and shows you what is actually being claimed.
 
 **What it is:** a six-layer analysis framework, packaged as a skill (`SKILL.md`).

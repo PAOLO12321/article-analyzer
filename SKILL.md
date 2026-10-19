@@ -17,6 +17,8 @@ Work through the steps in order. At each step, take the first branch that matche
 5. Only sources you opened count. Never check facts from memory. AI-generated pages are not sources. A machine-translated page counts as the original.
 6. Write in the language the user asked in. Quote the article in its own language. Point to places with a few words of the article in 「」, never paragraph numbers.
 
+If the user sends several articles, analyse them one after another and give a separate report for each, headed with its title.
+
 ## Step 1: Version
 
 Free version. (The only branch for now.)
