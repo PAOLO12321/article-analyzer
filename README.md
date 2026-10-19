@@ -17,7 +17,7 @@ Most online writing mixes checkable facts, opinions, predictions and framing int
 | Check factual claims against sources, preferring official first-hand data | Call something false because no source was found |
 | Surface hidden premises and unstated reasoning steps | Replace your own judgement in a specialist field |
 | Flag rewording, partial use of a source and missing conditions | Analyse content whose purpose is to evaluate a politician, government, political party or state body; judge whether a religion is true; or analyse content meant to help someone commit a crime or cause harm |
-| Note rhetorical devices next to the sentences they appear in | Analyse feelings or taste in writing about art, photography, music, film, entertainment, sport, fashion or poetry (it labels them and checks the facts around them) |
+| Note rhetorical devices next to the sentences they appear in | Argue with feelings or taste in reviews of art, film, music, photography, sport, fashion, entertainment or poetry (it labels them and checks the facts around them) |
 | Give an audit opinion on the checked facts, with the date of the check | Give a "negative" opinion |
 
 ## Installation
@@ -46,13 +46,15 @@ By default you get a short **overview**: the audit opinion, the fact-check count
 | Layer | What it does |
 |-------|-------------|
 | 1. Main claim and classification | States the article's main claim, then sorts each sentence into one of four categories |
-| 2. Fact verification | Checks each factual claim and gives one of five fixed labels: ✅ Accurate, ⚠️ Measure or scope shift, ❌ Factually wrong, 🔍 No source found, ❓ Uncertain (with a reason) |
+| 2. Fact verification | Checks each factual claim and gives one of five fixed labels: ✅ Accurate, ⚠️ Measure or scope shift, ❌ Does not match source, 🔍 No source found, ❓ Undetermined (with a reason) |
 | 3. Hidden premises | Finds the assumptions an argument needs but does not state |
 | 4. Selective presentation | Compares each claim with its own source: rewording, partial use of the source, missing conditions |
 | 5. Reasoning chain | Maps the reasoning and marks the steps the article does not state |
-| 6. Rhetorical devices | Notes framing such as opinion presented as fact, authority without a source, emotional wording or an analogy applied beyond its original domain |
+| 6. Rhetorical devices | Notes framing such as opinion presented as fact, authority without a source, loaded wording or an analogy beyond its domain |
 
-Before Layer 1, a content screener decides the route. News is checked for accuracy against the most credible source, ideally official first-hand data. Writing about art, photography, music, film, entertainment, sport, fashion or poetry (the creative-work route) skips plot summary (except cast, roles and premise), labels feelings and evaluations without arguing with them, and checks objective facts. A report of an event in those fields, such as a match result, is treated as news. Academic papers get a notice that the report does not replace reading the paper.
+The skill works like a decision tree. It first screens out red-line content and texts that are not articles. Then it picks one route by type, and each route has its own standard. **News**: key facts are checked against the most credible source, ideally official first-hand data. **Analysis or opinion** (adverts included): all six layers. **Emotive language** (reviews of art, film, music, sport and so on): plot summary is skipped, feelings and evaluations are labelled but not argued with, and only objective facts are checked. **Academic papers**: analysed like opinion pieces, with a notice that the report does not replace reading the paper.
+
+The overview checks up to five key claims, so it stays quick. Focused and full reports check more.
 
 ## The audit opinion
 
@@ -60,7 +62,7 @@ Modelled on financial audit opinions, and limited to the factual claims that wer
 
 - **Unqualified**: every checked claim is accurate
 - **Qualified**: at least one checked claim is not accurate or could not be confirmed; each is listed
-- **Unable to opine**: out of scope, fewer than three factual claims (not applied to creative-work writing), a measure or scope shift or selective presentation in more than half of the checked claims the main claim depends on, no web search, or more than half of the checked claims could not be confirmed
+- **Unable to opine**: out of scope, fewer than three factual claims (not applied to emotive-language reviews), a measure or scope shift or selective presentation in more than half of the checked claims the main claim depends on, no web search, or more than half of the checked claims could not be confirmed
 
 There is no "negative" opinion. Even if every claim is wrong, the opinion is Qualified with the problems listed.
 
