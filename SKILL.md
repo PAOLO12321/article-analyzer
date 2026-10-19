@@ -49,7 +49,7 @@ If only part of the text falls under a red line, analyse the rest. Mark the skip
 
 Accuracy is the main question for news.
 
-- **Breaking news or a single source.** If the event is very recent, or only one outlet reports it, say plainly that it cannot be confirmed yet. Do not guess.
+- **Breaking news or a single source.** If the event is very recent, or only one outlet reports it, say plainly that it cannot be confirmed yet. Do not guess. Judge "single source" claim by claim. Copies of the same wire story count as one source.
 - **Other news.** Cross-check each key factual claim against at least two independent sources. Report where the sources agree and where they differ.
 
 ### Strong-feeling route
@@ -98,9 +98,9 @@ Writers often build a solid factual paragraph, then end with their own conclusio
 
 ## The six layers
 
-### Layer 1: Paragraph map and sentence classification
+### Layer 1: Main claim and sentence classification
 
-First, give each paragraph one role from this list: **Background / Claim / Evidence / Example / Conclusion / Transition**. Do not add other roles. This shows the structure of the article before the detail.
+First, state the article's main claim in one sentence: the conclusion the article wants the reader to accept. If there are several, list up to three. The main claim is used to rank issues.
 
 Then classify each sentence into the four categories. If a sentence is hard to classify, mark it "classification uncertain" and give the reason.
 
@@ -128,6 +128,16 @@ Note: [what the source says, and how it differs from the article]
 If you are not sure which label fits, use ❓ Uncertain with a reason. Never invent a label. Predictions, opinions and unverifiable narratives were sorted out in Layer 1. They do not get a verification label.
 
 "No source found" does not mean false. Always write: "This tool found no source that supports or contradicts this claim."
+
+**What counts as a source.**
+- Only a page you opened and read. A search result snippet is not a source.
+- Prefer the primary source. If only a secondary source is available, use it and say so in the note.
+- Copies of the same wire story or press release on different sites are one source, not several.
+- Never check facts from your own memory. Only sources you opened count.
+
+**What counts as one claim.** One checkable statement. Several figures in one sentence that come from the same source count as one claim.
+
+**Overlap with Layer 4.** If a claim changes the meaning of its source, label it ⚠️ here and also show it in Layer 4. Count it once.
 
 ### Layer 3: Hidden premises
 
@@ -192,9 +202,9 @@ The audit opinion covers **factual claims only**. Always say so.
 
 | Opinion | When |
 |---------|------|
-| Unqualified | All factual claims match their sources |
-| Qualified | Some factual claims do not match their sources (list them) |
-| Unable to opine | One of: (1) the text falls under a red line; (2) too few verifiable claims (fewer than 3); (3) selective presentation is so heavy that checking single claims no longer shows the whole picture; (4) no web search was available, so nothing could be verified |
+| Unqualified | Every factual claim is ✅ |
+| Qualified | At least one claim is not ✅. List ⚠️ and ❌ claims as problems. List 🔍 and ❓ claims separately as "Not confirmed" |
+| Unable to opine | One of: (1) the text falls under a red line; (2) too few verifiable claims (fewer than 3); (3) selective presentation is so heavy that checking single claims no longer shows the whole picture; (4) no web search was available, so nothing could be verified; (5) more than half of the claims are 🔍 or ❓ (reason: "most claims could not be confirmed") |
 
 **Never give a "negative" opinion.** Even if every factual claim is wrong, give a Qualified opinion and list the problems.
 
@@ -202,7 +212,7 @@ The audit opinion covers **factual claims only**. Always say so.
 ═══ Audit opinion ═══
 Opinion: [Unqualified / Qualified / Unable to opine]
 Scope: covers factual claims only (N claims). Does not cover opinions, predictions or unverifiable narratives.
-[Qualified: list of problems]
+[Qualified: problems (⚠️ ❌), then "Not confirmed:" (🔍 ❓)]
 [Unable to opine: reason]
 ```
 
@@ -223,10 +233,14 @@ Other sources on this topic:
 Always run the analysis you need to find the answer. The mode only controls what you show.
 
 **Choosing a mode.**
-- If the user asks for a mode ("quick look", "focused", "full"), use it.
-- Otherwise, give the **Overview** first. End it with one line offering the focused breakdown.
+- If the user asks for a mode, use it: Overview ("quick look", 速览), Focused ("focused", 重点), Full ("full", 完整).
+- Otherwise, give the **Overview** first. End it with one line offering the focused breakdown, in the user's language.
 
-**Length.** Count the original article's length first. Then keep within both limits below. Word counts are estimates, so aim below the limit. The fixed tool disclosure and feedback lines do not count towards the limit.
+**Length.** Limits are counted in the output language. Chinese: count every character except spaces. English: count words.
+- If the report is in the same language as the article, keep within both limits below.
+- If the report is in a different language, use only the fixed limit.
+- Counts are estimates, so aim below the limit.
+- Notices, the tool disclosure and the feedback line do not count towards the limit.
 
 | Mode | Limit as share of the original | Fixed limit (use whichever is smaller) |
 |------|-------------------------------|----------------------------------------|
@@ -237,6 +251,7 @@ Always run the analysis you need to find the answer. The mode only controls what
 ### Overview
 
 ```
+[Notices, if any: what could not be done]
 [Article type, one line]
 Factual claims: N (✅ X / ⚠️ X / ❌ X / 🔍 X / ❓ X)
 Other issues: hidden premises X · selective presentation X · logic jumps X · rhetorical devices X
@@ -245,17 +260,22 @@ The most important issues:
 2. [issue, paragraph number]
 3. [issue, paragraph number]
 These are only the most important. All issues are in the focused report.
-[Notices, if any: what could not be done; paper notice]
-Reply "focused" to see them all.
+[Paper notice, if it applies]
+Reply "focused" to see them all.   (Chinese: 回复"重点"查看全部问题。)
 ```
 
 The counts must come from the analysis you ran. Do not estimate them.
 
 **How many issues to list.** List up to 3. If there are fewer, list only those. Never pad the list. If there are none, write "No issues found."
 
-**How to choose the most important.** Rank in this order:
-1. Position first: issues in paragraphs marked Claim or Conclusion in the paragraph map come before issues elsewhere.
-2. Then severity, within the same position: ❌ Factually wrong > ⚠️ Concept shift > a hidden premise the main conclusion depends on > 🔍 No source found or ❓ Uncertain > logic jump > rhetorical device.
+**How to choose the most important.** Rank by type, in three tiers:
+1. **Facts wrong or unclear:** ❌ Factually wrong first, then 🔍 No source found and ❓ Uncertain.
+2. **Concept shift and faulty reasoning:** ⚠️ Concept shift, logic jumps, hidden premises.
+3. **Emotional manipulation:** emotional wording that pushes the reader's judgement.
+
+Other rhetorical devices come after the three tiers.
+
+Within the tiers, relevance decides. An issue the main claim depends on comes before any issue in a peripheral detail (a date in the background, a minor name), whatever the tier. A wrong date in a background paragraph is not one of the most important issues if the main claim does not rest on it.
 
 Write each issue as a description, not a verdict. "Paragraph 3: the 40% figure has no source" is right. "Paragraph 3 is unreliable" is wrong.
 
@@ -263,8 +283,10 @@ Write each issue as a description, not a verdict. "Paragraph 3: the 40% figure h
 
 Run all six layers. Show:
 
-1. **The audit opinion first**, clearly set apart.
-2. Then, paragraph by paragraph, the most important problems only.
+1. Notices, if any.
+2. **The audit opinion**, clearly set apart.
+3. The main claim, in one line.
+4. Then, paragraph by paragraph, the most important problems only. Several unconfirmed claims may be grouped in one line.
 
 ### Full
 
@@ -277,8 +299,8 @@ Run all six layers. Show:
 - Hidden premises: N
 - Selective presentation: found / not found
 
-## Paragraph map
-[Layer 1 roles]
+## Main claim
+[from Layer 1]
 
 ## Paragraph-by-paragraph analysis
 [classification, verification, premises, logic, rhetoric for each paragraph]
@@ -292,7 +314,11 @@ Run all six layers. Show:
 
 ### Tool disclosure (all modes, one line in Overview)
 
-"This analysis is AI-assisted. Verification relies on publicly searchable sources; not found does not mean it does not exist. The structural analysis reflects the tool's reading and may contain errors. Check important information independently."
+Write it in the output language.
+
+English: "This analysis is AI-assisted. Verification relies on publicly searchable sources; not found does not mean it does not exist. The structural analysis reflects the tool's reading and may contain errors. Check important information independently."
+
+中文："本分析由 AI 辅助完成。核查依赖可公开搜索的来源，未找到不等于不存在。结构分析反映本工具的理解，可能有误。重要信息请自行核实。"
 
 ## When something cannot be confirmed
 
@@ -312,6 +338,8 @@ Never lower the quality of the analysis without saying so. State at the top of t
 |-----------|------------|
 | No web search tool | Say at the top: "No web search was available, so factual claims were not verified." Run Layers 1, 3, 5 and 6 as normal. Skip Layers 2 and 4 and give the reason. Do not mark claims 🔍. Do not check facts from your own memory: it may be out of date or wrong. You may still point out where the article contradicts itself (for example, 40% in one paragraph and 30% in another). Audit opinion: Unable to opine, verification not possible. |
 | Paywall, or the link cannot be opened | Say what you received (title only, first part only). Analyse only that. Ask the user to paste the full text. Never guess the content from the title. |
+| Only a summary or paraphrase of the text | Say so at the top: results may be incomplete, and quotes may not be exact. Ask the user to paste the full text. |
+| No one to ask (structured output, pipelines) | Do not ask. State the problem in notices and continue. |
 | Very long text | The Overview still applies, within its length limit. If a Focused or Full report does not fit in one reply, split it and label each part "Part 1 of N". For a text as long as a book chapter, first ask which sections to analyse. |
 | Images or screenshots | If you can read the text in the image, analyse it and say: "The following text was read from an image." For charts, check only what is legible. |
 | Video or audio | Say it cannot be analysed directly. Ask for a transcript. |
@@ -331,23 +359,25 @@ Structured output always contains the full analysis. The length limits do not ap
   "article_type": "news | analysis | strong_feeling | paper | out_of_scope",
   "article_language": "",
   "output_language": "",
+  "text_completeness": "full | partial | summary_only",
   "notices": [""],
-  "paragraphs": [
-    {"index": 1, "role": "background | claim | evidence | example | conclusion | transition", "status": "analysed | outside_scope"}
-  ],
+  "main_claims": [""],
+  "paragraphs": [{"index": 1, "status": "analysed | outside_scope"}],
   "sentences": [
     {"paragraph": 1, "text": "", "category": "factual_claim | analysis_opinion | unverifiable_narrative | prediction", "subtype": "feeling | evaluation | personal_story | anonymous_source | vague_citation | null"}
   ],
   "claims": [
-    {"paragraph": 1, "text": "", "label": "accurate | concept_shift | factually_wrong | no_source_found | uncertain", "source": "", "note": "", "reason_if_uncertain": ""}
+    {"paragraph": 1, "text": "", "label": "accurate | concept_shift | factually_wrong | no_source_found | uncertain", "source": "", "source_type": "primary | secondary", "checked_sources": [""], "note": "", "reason_if_uncertain": ""}
   ],
-  "hidden_premises": [{"argument": "", "premise": "", "if_fails": ""}],
+  "hidden_premises": [{"paragraph": 1, "type": "argument | evaluation_standard", "argument": "", "premise": "", "if_fails": ""}],
   "selective_presentation": [{"paragraph": 1, "type": "rewording | cherry_picking | missing_conditions", "detail": ""}],
   "logic_jumps": [{"from": "", "to": "", "unverified_steps": [""]}],
   "rhetoric": [{"paragraph": 1, "device": "", "description": ""}],
-  "top_issues": ["", "", ""],
+  "top_issues": ["up to 3 items; fewer if there are fewer; empty if none"],
   "other_sources": [{"name": "", "link": "", "quote": ""}],
-  "audit_opinion": {"opinion": "unqualified | qualified | unable_to_opine", "scope": "", "claims_covered": 0, "issues": [""], "reason": ""}
+  "audit_opinion": {"opinion": "unqualified | qualified | unable_to_opine", "adjusted": false, "scope": "", "claims_covered": 0, "problems": [""], "not_confirmed": [""], "feelings_count": 0, "evaluations_count": 0, "reason": ""},
+  "tool_disclosure": "",
+  "feedback": ""
 }
 ```
 
@@ -358,10 +388,13 @@ Check these points before you output the report. Fix anything that fails first.
 1. Only the five verification labels are used
 2. Every ✅ ⚠️ ❌ has a source
 3. No evaluative words (good, bad, misleading, misconception and so on)
-4. Layers appear in order, and any skipped layer has a reason
+4. All six layers were run, and any skipped layer has a reason
 5. Anything that could not be done is stated at the top
 6. The output is within the length limit for its mode
 
 ## Feedback
 
-End every report with: "Feedback: https://github.com/PAOLO12321/article-analyzer/issues"
+End every report with the feedback line, in the output language:
+
+English: "Feedback: https://github.com/PAOLO12321/article-analyzer/issues"
+中文："反馈：https://github.com/PAOLO12321/article-analyzer/issues"
